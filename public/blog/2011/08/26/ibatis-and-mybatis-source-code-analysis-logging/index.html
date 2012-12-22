@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Foredoomed">
+  <meta name="generator" content="jekyll">
+  <meta name="description" content="The homepage of Zhixingheyi">
+  <link href="favicon.ico" rel="icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/css/highlight.css" type="text/css">
+  <title></title>
+</head>
+
+<body>
+
+<div style="width:700px">
+  <h1>iBatis和myBatis源码分析之日志</h1>
+
+<em>By Foredoomed on <time date="2011-08-26 18:20:00 +0800">August 26, 2011</time></em>
+
+<h2 id="section">包结构分析</h2>
+
+<h3 id="ibatislogging">iBatis的logging包结构</h3>
+
+<table border="1" width="100%" cellpadding="3" cellspacing="0" summary=""><tbody><tr>
+<th align="left" colspan="2" style="background-color:#CCCCFF">
+<b>Packages</b></th></tr>
+<tr bgcolor="white">
+<td width="20%"><b>com.ibatis.common.logging</b></td>
+<td>&nbsp;</td>
+</tr>
+<tr bgcolor="white">
+<td width="20%"><b>com.ibatis.common.logging.jakarta</b></td>
+<td>&nbsp;</td>
+</tr>
+<tr bgcolor="white">
+<td width="20%"><b>com.ibatis.common.logging.jdk14</b></td>
+<td>&nbsp;</td>
+</tr>
+<tr bgcolor="white">
+<td width="20%"><b>com.ibatis.common.logging.log4j</b></td>
+<td>&nbsp;</td>
+</tr>
+<tr bgcolor="white">
+<td width="20%"><b>com.ibatis.common.logging.nologging</b></td>
+<td>&nbsp;</td>
+</tr>
+</tbody></table>
+
+<p>iBatis把对logging支持的类全部放在了common包的子包下，并且又根据不同的logging实现又分成了commons-logging，jdk1.4自带的logging，log4j和nologging四个子包。个人感觉整个包的划分还是非常清晰的，但是nologging包的存在感觉有点鸡肋，因为日志是一个系统必备的功能之一，很难想象一个系统缺少了日志怎么做数据分析，性能调优等。难道作者认为有些时候或有一天就不需要日志了？</p>
+
+<h3 id="mybatislogging">myBatis的logging包结构</h3>
+
+<table border="1" width="100%" cellpadding="3" cellspacing="0" summary=""><tbody><tr>
+<th align="left" colspan="2" style="background-color:#CCCCFF">
+<b>Packages</b></th></tr>
+<tr bgcolor="white">
+<td width="20%"><b>org.apache.ibatis.logging</b></td>
+<td>&nbsp;</td>
+</tr>
+<tr bgcolor="white">
+<td width="20%"><b>org.apache.ibatis.logging.commons</b></td>
+<td>&nbsp;</td>
+</tr>
+<tr bgcolor="white">
+<td width="20%"><b>org.apache.ibatis.logging.jdbc</b></td>
+<td>&nbsp;</td>
+</tr>
+<tr bgcolor="white">
+<td width="20%"><b>org.apache.ibatis.logging.jdk14</b></td>
+<td>&nbsp;</td>
+</tr>
+<tr bgcolor="white">
+<td width="20%"><b>org.apache.ibatis.logging.log4j</b></td>
+<td>&nbsp;</td>
+</tr>
+<tr bgcolor="white">
+<td width="20%"><b>org.apache.ibatis.logging.nologging</b></td>
+<td>&nbsp;</td>
+</tr>
+<tr bgcolor="white">
+<td width="20%"><b>org.apache.ibatis.logging.slf4j</b></td>
+<td>&nbsp;</td>
+</tr>
+<tr bgcolor="white">
+<td width="20%"><b>org.apache.ibatis.logging.stdout</b></td>
+<td>&nbsp;</td>
+</tr>
+</tbody></table>
+
+<p>可以看到myBatis的logging包结构较之iBatis基本没变，但是增加了jdbc，slf4j以及stdout的支持。对jdbc执行sql语句的日志支持看上去很美好，但是给性能带来的影响比较大，这个等下面的源码分析再详细说明；增加对slf4j的支持应该是大势所趋没有问题；而增加对stdout的支持是一个很好的功能，在测试阶段应该会是一个很好的日志功能实现。</p>
+
+<h2 id="section-1">源码分析</h2>
+
+<h3 id="ibatis">iBatis</h3>
+
+<h4 id="log">Log接口</h4>
+
+<pre><code>public interface Log {
+
+  boolean isDebugEnabled();
+
+  void error(String s, Throwable e);
+
+  void error(String s);
+  
+  public void debug(String s);
+
+  public void warn(String s);
+
+}</code></pre>
+
+<p>Log接口定义了三个log级别，所有的log实现都会去实现这个接口，所以它是所有log的代表。</p>
+
+<h4 id="logfactory">LogFactory工厂类</h4>
+
+<pre><code>public class LogFactory {
+
+  private static Constructor logConstructor;
+
+  static {
+    tryImplementation(&quot;org.apache.commons.logging.LogFactory&quot;, &quot;com.ibatis.common.logging.jakarta.JakartaCommonsLoggingImpl&quot;);
+    tryImplementation(&quot;org.apache.log4j.Logger&quot;, &quot;com.ibatis.common.logging.log4j.Log4jImpl&quot;);
+    tryImplementation(&quot;java.util.logging.Logger&quot;, &quot;com.ibatis.common.logging.jdk14.Jdk14LoggingImpl&quot;);
+    tryImplementation(&quot;java.lang.Object&quot;, &quot;com.ibatis.common.logging.nologging.NoLoggingImpl&quot;);
+  }
+
+  private static void tryImplementation(String testClassName, String implClassName) {
+    if (logConstructor == null) {
+      try {
+        Resources.classForName(testClassName);
+        Class implClass = Resources.classForName(implClassName);
+        logConstructor = implClass.getConstructor(new Class[]{Class.class});
+      } catch (Throwable t) {
+      }
+    }
+  }
+
+  public static Log getLog(Class aClass) {
+    try {
+      return (Log)logConstructor.newInstance(new Object[]{aClass});
+    } catch (Throwable t) {
+      throw new RuntimeException(&quot;Error creating logger for class &quot; + aClass + &quot;.  Cause: &quot; + t, t);
+    }
+  }
+
+  public static synchronized void selectLog4JLogging() {
+    try {
+      Resources.classForName(&quot;org.apache.log4j.Logger&quot;);
+      Class implClass = Resources.classForName(&quot;com.ibatis.common.logging.log4j.Log4jImpl&quot;);
+      logConstructor = implClass.getConstructor(new Class[]{Class.class});
+    } catch (Throwable t) {
+    }
+  }
+  
+  public static synchronized void selectJavaLogging() {
+    try {
+      Resources.classForName(&quot;java.util.logging.Logger&quot;);
+      Class implClass = Resources.classForName(&quot;com.ibatis.common.logging.jdk14.Jdk14LoggingImpl&quot;);
+      logConstructor = implClass.getConstructor(new Class[]{Class.class});
+    } catch (Throwable t) {
+    }
+  }
+}</code></pre>
+
+<p>在这个工厂类里我们可以非常容易地感觉到“坏味道”，那就是在catch块中什么都不做，这是应该尽量避免出现的情况。在static块中会尝试依次加载所有的log实现类，这点也是值得商榷的。因为在一个系统中一般只使用一种日志实现，一次性加载所有的实现只会带来性能问题；还有一个问题就是是否需要动态切换日志实现的功能，至少我觉得这个功能也是个鸡肋。</p>
+
+<h3 id="mybatis">myBatis</h3>
+
+<h4 id="logfactory-1">LogFactory工厂类：</h4>
+
+<pre><code>public class LogFactory {
+
+  private static Constructor&lt; ? extends Log&gt; logConstructor;
+
+  static {
+    tryImplementation(new Runnable() {
+      public void run() {
+        useSlf4jLogging();
+      }
+    });
+    tryImplementation(new Runnable() {
+      public void run() {
+        useCommonsLogging();
+      }
+    });
+    tryImplementation(new Runnable() {
+      public void run() {
+        useLog4JLogging();
+      }
+    });
+    tryImplementation(new Runnable() {
+      public void run() {
+        useJdkLogging();
+      }
+    });
+    tryImplementation(new Runnable() {
+      public void run() {
+        useNoLogging();
+      }
+    });
+  }
+
+  public static Log getLog(Class&lt; ?&gt; aClass) {
+    try {
+      return logConstructor.newInstance(new Object[]{aClass});
+    } catch (Throwable t) {
+      throw new LogException(&quot;Error creating logger for class &quot; + aClass + &quot;.  Cause: &quot; + t, t);
+    }
+  }
+
+  public static synchronized void useSlf4jLogging() {
+    setImplementation(&quot;org.apache.ibatis.logging.slf4j.Slf4jImpl&quot;);
+  }
+
+  public static synchronized void useCommonsLogging() {
+    setImplementation(&quot;org.apache.ibatis.logging.commons.JakartaCommonsLoggingImpl&quot;);
+  }
+
+  public static synchronized void useLog4JLogging() {
+    setImplementation(&quot;org.apache.ibatis.logging.log4j.Log4jImpl&quot;);
+  }
+
+  public static synchronized void useJdkLogging() {
+    setImplementation(&quot;org.apache.ibatis.logging.jdk14.Jdk14LoggingImpl&quot;);
+  }
+
+  public static synchronized void useStdOutLogging() {
+    setImplementation(&quot;org.apache.ibatis.logging.stdout.StdOutImpl&quot;);
+  }
+
+  public static synchronized void useNoLogging() {
+    setImplementation(&quot;org.apache.ibatis.logging.nologging.NoLoggingImpl&quot;);
+  }
+
+  private static void tryImplementation(Runnable runnable) {
+    if (logConstructor == null) {
+      try {
+        runnable.run();
+      } catch (Throwable t) {
+        //ignore
+      }
+    }
+  }
+
+  private static void setImplementation(String implClassName) {
+    try {
+      @SuppressWarnings(&quot;unchecked&quot;)
+      Class&lt; ? extends Log&gt; implClass = (Class&lt; ? extends Log&gt;) Resources.classForName(implClassName);
+      Constructor&lt; ? extends Log&gt; candidate = implClass.getConstructor(new Class[]{Class.class});
+      Log log = candidate.newInstance(new Object[]{LogFactory.class});
+      log.debug(&quot;Logging initialized using '&quot; + implClassName + &quot;' adapter.&quot;);
+      logConstructor = candidate;
+    } catch (Throwable t) {
+      throw new LogException(&quot;Error setting Log implementation.  Cause: &quot; + t, t);
+    }
+  }</code></pre>
+
+<p>在myBatis的实现里，除了加入了范型，多线程外没有什么太大的变化。还是要加载所有的log实现类，但是更大的问题是加载方法用synchronized来修饰了，且不论是否有必要全部加载，但就全部的同步方法就会给性能造成负面影响；而且在iBatis中的“坏味道”依旧存在。</p>
+
+<h2 id="section-2">总结</h2>
+
+<p>在这篇博文里比较了iBatis和myBatis的log实现，发现了存在“坏味道”，即在catch块中什么事都没做，这种情况应该避免发生；还有一次性加载所有的log实现类以及动态切换log实现都是不太常用的功能，如果要用iBatis或myBatis的log实现的话需要修改源代码来提高性能。</p>
+
+
+
+<br><br>
+
+<div id="disqus_thread" style="width:700px"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'zhixingheyi'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr>
+
+Zhixingheyi - <a href="http://liuxuan.info">http://liuxuan.info/</a>
+</div>
+
+<script src="/javascript/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17293168-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+  var sc_project=8495631;
+  var sc_invisible=1;
+  var sc_security="5b0817e1";
+  var scJsHost = (("https:" == document.location.protocol) ?
+  "https://secure." : "http://www.");
+  document.write("<sc"+"ript type='text/javascript' src='" +
+  scJsHost +
+  "statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript>
+  <div class="statcounter"><a title="website
+  statistics" href="http://statcounter.com/"
+  target="_blank"><img class="statcounter"
+  src="https://c.statcounter.com/8495631/0/5b0817e1/1/"
+  alt="website statistics"></a></div>
+</noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</body>
+</html>

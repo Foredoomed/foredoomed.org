@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Foredoomed">
+  <meta name="generator" content="jekyll">
+  <meta name="description" content="The homepage of Zhixingheyi">
+  <link href="favicon.ico" rel="icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/css/highlight.css" type="text/css">
+  <title></title>
+</head>
+
+<body>
+
+<div style="width:700px">
+  <h1>Linux常用命令</h1>
+
+<em>By Foredoomed on <time date="2012-06-16 14:16:00 +0800">June 16, 2012</time></em>
+
+<p>不定期更新一些在Linux下经常会用到的命令，其中一些也是在别的地方看到就加入到这个集合来了。</p>
+
+<h2 id="section">系统</h2>
+
+<pre><code>uname -a               # 查看内核/操作系统/CPU信息  
+head -n 1 /etc/issue   # 查看操作系统版本  
+cat /proc/cpuinfo      # 查看CPU信息  
+hostname               # 查看计算机名  
+lspci -tv              # 列出所有PCI设备  
+lsusb -tv              # 列出所有USB设备  
+lsmod                  # 列出加载的内核模块  
+env                    # 查看环境变量</code></pre>
+
+<h2 id="section-1">资源</h2>
+
+<pre><code>free -m                       # 查看内存使用量和交换区使用量  
+df -h                         # 查看各分区使用情况  
+du -sh &lt;folder&gt;               # 查看指定目录的大小  
+grep MemTotal /proc/meminfo   # 查看内存总量  
+grep MemFree /proc/meminfo    # 查看空闲内存量  
+uptime                        # 查看系统运行时间、用户数、负载  
+cat /proc/loadavg             # 查看系统负载</code></pre>
+
+<h2 id="section-2">磁盘和分区</h2>
+
+<pre><code>mount | column -t      # 查看挂接的分区状态  
+fdisk -l               # 查看所有分区  
+swapon -s              # 查看所有交换分区  
+hdparm -i /dev/hda     # 查看磁盘参数(仅适用于IDE设备)  
+dmesg | grep IDE       # 查看启动时IDE设备检测状况</code></pre>
+
+<h2 id="section-3">网络</h2>
+
+<pre><code>ifconfig               # 查看所有网络接口的属性  
+iptables -L            # 查看防火墙设置  
+route -n               # 查看路由表  
+netstat -lntp          # 查看所有监听端口  
+netstat -antp          # 查看所有已经建立的连接  
+netstat -s             # 查看网络统计信息  
+进程
+ps -ef                 # 查看所有进程  
+top                    # 实时显示进程状态</code></pre>
+
+<h2 id="section-4">用户</h2>
+
+<pre><code>w                         # 查看活动用户  
+id &lt;username&gt;             # 查看指定用户信息  
+last                      # 查看用户登录日志  
+cut -d: -f1 /etc/passwd   # 查看系统所有用户  
+cut -d: -f1 /etc/group    # 查看系统所有组  
+crontab -l                # 查看当前用户的计划任务</code></pre>
+
+<h2 id="section-5">服务</h2>
+
+<pre><code>chkconfig --list              # 列出所有系统服务  
+chkconfig --list | grep on    # 列出所有启动的系统服务</code></pre>
+
+<h2 id="section-6">程序</h2>
+
+<pre><code>rpm -Uvh http://xxx.rpm   # 添加软件库</code></pre>
+
+
+<br><br>
+
+<div id="disqus_thread" style="width:700px"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'zhixingheyi'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr>
+
+Zhixingheyi - <a href="http://liuxuan.info">http://liuxuan.info/</a>
+</div>
+
+<script src="/javascript/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17293168-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+  var sc_project=8495631;
+  var sc_invisible=1;
+  var sc_security="5b0817e1";
+  var scJsHost = (("https:" == document.location.protocol) ?
+  "https://secure." : "http://www.");
+  document.write("<sc"+"ript type='text/javascript' src='" +
+  scJsHost +
+  "statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript>
+  <div class="statcounter"><a title="website
+  statistics" href="http://statcounter.com/"
+  target="_blank"><img class="statcounter"
+  src="https://c.statcounter.com/8495631/0/5b0817e1/1/"
+  alt="website statistics"></a></div>
+</noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</body>
+</html>

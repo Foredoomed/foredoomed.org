@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Foredoomed">
+  <meta name="generator" content="jekyll">
+  <meta name="description" content="The homepage of Zhixingheyi">
+  <link href="favicon.ico" rel="icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/css/highlight.css" type="text/css">
+  <title></title>
+</head>
+
+<body>
+
+<div style="width:700px">
+  <h1>浏览器是如何工作的(三)</h1>
+
+<em>By Foredoomed on <time date="2011-12-09 23:54:00 +0800">December  9, 2011</time></em>
+
+<h2 id="section">3.1 解析</h2>
+
+<p>从渲染引擎解析开始是非常重要的阶段，我们会对它作更深入的研究。首先还是简略的介绍一下什么是解析。</p>
+
+<p>解析一个文档(document)的含义是：把这个文档转换成一些有意义的结构或可以被理解和使用的代码。解析的结果通常是一棵，它的节点代表文档的结构。这棵树被称为解析树或语法树。</p>
+
+<p>实例 - 2 + 3 - 1 这个表达式的解析结果会返回下面的树：</p>
+
+<p><img src="http://farm8.staticflickr.com/7158/6481798259_420d333218.jpg&quot; width=&quot;400&quot; height=&quot;155&quot;" alt="paring tree" /></p>
+
+<h3 id="section-1">3.1.1 语法</h3>
+
+<p>解析是建立在文档遵守的语法规(语言和格式)则上的。每个可以被解析的格式必须有词汇和语法规则。这被称为与内容无关的语法。人类语言不是这种语言，因此不能被约定的解析技术而解析。</p>
+
+<h3 id="section-2">3.1.2 解析器</h3>
+
+<p>整个解析过程可以被分成两个子过程 - 词法分析和语法分析</p>
+
+<p>词法分析是把输入分解成标记(token)的过程。标记是语言的词汇，在人类语言中，它是由字典里的所有单词组成的。</p>
+
+<p>语法分析就是应用语言的语法规则。</p>
+
+<p>分析器一般由它的两个组件承担不同的工作。一个是lexer(有时也会被称为tokenizer)，它主要是把输入分解成合法的标记。另一个是parser，它主要是根据语言的语法规则，分析文档构建解析树。lexer知道怎么消除不相关的字符，像空格符和还行符。</p>
+
+<p><img src="http://farm8.staticflickr.com/7011/6481889667_2fe7dd07cb.jpg&quot; width=&quot;101&quot; height=&quot;300&quot;" alt="paring tree" /></p>
+
+<p>解析的过程是迭代式的。parser一般会向lexer请求一个新的标记，然后尝试用语法规则来匹配这个标记。如果匹配一个规则，跟这个标记对应的节点会被加入到解析树，然后请求另一个标记。</p>
+
+<p>如果没有规则匹配，parser会把标记保存在内部，直到所有与保存在内部的标记相匹配的规则被找到之前，它会一直请求新的标记。如果没有找到相应的规则，parser会抛出一个异常。这意味着这个文档是不合法的，并且有语法错误。</p>
+
+<h3 id="section-3">3.1.3 翻译</h3>
+
+<p>大多数情况下，解析树不是最终的成品。解析在翻译中经常被用到，把输入文档转换成另一种格式。一个例子就是编译。编译器是把源代码编译成为机器代码，首先解析为解析树，然后把解析树翻译成为机器代码稳定。</p>
+
+<p><img src="http://farm8.staticflickr.com/7026/6481955767_7abc1f157b.jpg&quot; width=&quot;104&quot; height=&quot;400&quot;" alt="compilation flow" /></p>
+
+<h3 id="section-4">3.1.4 解析实例</h3>
+
+<p>让我们试着定义一个简单的数学语言，然后分析表达式<code>2 + 3 - 1</code>解析结果。</p>
+
+<p>词汇：可以有整数，加号和减号。</p>
+
+<p>语法：</p>
+
+<ol>
+  <li>代码块是表达式，数据项和操作符。</li>
+  <li>可以包括任何数字的表达式。</li>
+  <li>一个表达式是被定义为两个数据项之间有一个操作符。</li>
+  <li>操作符是加号或减号的其中之一。</li>
+  <li>数据项是一个整数或表达式。</li>
+</ol>
+
+<p>现在来分析输入：2 + 3 - 1</p>
+
+<p>第一次匹配规则的是<strong>2</strong>，然后根据规则#5，它是一个数据项。第二次匹配的是2 + 3，根据规则#3。下一次匹配就是整个表达式。2 + 3 - 1 之所以是一个表达式是因为我们已经知道，2 + 3 是一个数据项，而且它后面跟着操作符，操作符后面跟着数据项。2 + + 不会匹配任何规则，因此这是个非法的输入。</p>
+
+<h3 id="section-5">3.1.5 词汇和语法的正式定义</h3>
+
+<p>词汇一般用正则表达式来表示。比如，我们上面的例子可以被定义成：</p>
+
+<pre><code>INTEGER :0|[1-9][0-9]*
+PLUS : +
+MINUS: -</code></pre>
+
+<p>语法一般会被定义成一种叫做<strong>BNF</strong>的格式，我们的语言会被定义成：</p>
+
+<pre><code>expression :=  term  operation  term
+operation :=  PLUS | MINUS
+term := INTEGER | expression</code></pre>
+
+<p>我们知道一个语言如果是内容无关的语言，那么这个语言是可以被一般解析器解析的。内容无关语法的粗略定义是它可以用BNF表示。正式的定义可以参考<a href="http://en.wikipedia.org/wiki/Context-free_grammar" title="Wikipedia's article on Context-free grammar">Wikipedia’s article on Context-free grammar</a>。</p>
+
+<h3 id="section-6">3.1.6 解释器的种类</h3>
+
+<p>解释器有两种：<strong>自上而下</strong>和<strong>自下而上</strong>的解析器。一个简单的解释是：自上而下的解析器在更高层次上关注语法，然后尝试匹配他们。自下而上的解析器是从输入开始，渐进的把他们转换进入语法规则，从低级规则到高级规则变化。</p>
+
+<p>让我们来看一下两种类型的解析器是如何解析我们的例子的：</p>
+
+<p>自上而下的解析器从更高层次的规则开始：它会先确定<code>2 + 3</code>是一个表达式，然后再确定<code>2 + 3 + 1</code>是一个表达式(确定表达式的过程涉及其他的规则匹配，但是起点是最高层次的规则)。</p>
+
+<p>而自下而上的表达式会扫描输入，直到有一个规则匹配。然后把匹配的输入换成规则，这个过程会持续到输入的结尾。部分匹配的表达式会被放在解析栈中。</p>
+
+<table border="1">
+  <tbody><tr><th>Stack</th>                <th>Input</th></tr>
+  <tr><td>&nbsp;</td><td><samp>2 + 3 - 1</samp></td></tr>  
+  <tr><td>term</td><td><samp>+ 3 - 1</samp></td></tr> 
+  <tr><td>term operation</td><td><samp>3 - 1</samp></td></tr>
+  <tr><td>expression</td><td><samp>- 1</samp></td></tr> 
+  <tr><td>expression operation</td><td><samp>1         </samp></td></tr> 
+  <tr><td>expression</td>           <td><samp>&nbsp;</samp></td></tr>                                             
+</tbody></table>
+
+<p>这种类型的自下而上的解析器被称为移位消除解析器(shift-reduce parser)，因为输入被移到了右边(想象有个指针指向输入头，然后往右边移动)，并且根据规则递减。</p>
+
+<h3 id="section-7">3.1.7 自动生成解析器</h3>
+
+<p>有很多工具可以为你生成解析器。他们被称为解析器生成器。你把语言的语法输入其中，他们就会自动生成解析器。创建一个解析器需要对解析有很深的理解，并且手工创建一个优化过的解析器是比较困难的。</p>
+
+<p>Webkit使用的是两个有名的解析器生成器：<a href="http://en.wikipedia.org/wiki/Flex_lexical_analyser" title="Flex">Flex</a>用来生成词法分析器，<a href="http://www.gnu.org/software/bison/" title="Bison">Bison</a>用来生成语法分析器。Flex的输入是一个包含正则表达式定义的标记的文件；Bison的输入是BNF格式的语法规则。</p>
+
+
+
+<br><br>
+
+<div id="disqus_thread" style="width:700px"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'zhixingheyi'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr>
+
+Zhixingheyi - <a href="http://liuxuan.info">http://liuxuan.info/</a>
+</div>
+
+<script src="/javascript/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17293168-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+  var sc_project=8495631;
+  var sc_invisible=1;
+  var sc_security="5b0817e1";
+  var scJsHost = (("https:" == document.location.protocol) ?
+  "https://secure." : "http://www.");
+  document.write("<sc"+"ript type='text/javascript' src='" +
+  scJsHost +
+  "statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript>
+  <div class="statcounter"><a title="website
+  statistics" href="http://statcounter.com/"
+  target="_blank"><img class="statcounter"
+  src="https://c.statcounter.com/8495631/0/5b0817e1/1/"
+  alt="website statistics"></a></div>
+</noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</body>
+</html>

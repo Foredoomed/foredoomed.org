@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Foredoomed">
+  <meta name="generator" content="jekyll">
+  <meta name="description" content="The homepage of Zhixingheyi">
+  <link href="favicon.ico" rel="icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/css/highlight.css" type="text/css">
+  <title></title>
+</head>
+
+<body>
+
+<div style="width:700px">
+  <h1>在VPS上安装网络流量监控工具vnStat</h1>
+
+<em>By Foredoomed on <time date="2011-08-22 18:04:00 +0800">August 22, 2011</time></em>
+
+<p>用上VPS以后博客的访问速度是比以前快了很多，但是也有烦心的事，就是担心每个月的流量有没有超标。你可以通过VPS提供给你的Control Panel的地址登录，然后查看流量数据。但是这种方法始终有点复杂，最好有种直接输入一个URL就能查看流量数据的方法。在Google上搜索了一会儿之后，终于找到了一个好工具：<a href="http://humdi.net/vnstat/" title="vnStat">vnStat</a>。 </p>
+
+<p>vnStat是Linux和BSD平台上基于控制台的网络流量监控工具。它使用的是Linux内核提供的网络接口统计作为信息源。vnStat不会嗅探网络并且保证占系统资源少，需要注意的是内核版本要在2.2之上。</p>
+
+<p>vnStat只是一个基于控制台的工具，我们还需要安装一个它的PHP扩展<a href="href=&quot;http://www.sqweek.com/sqweek/index.php?p=1" title="vnStat PHP frontend">vnStat PHP frontend</a>，那么我们就能直接通过流量器来查看流量数据了。</p>
+
+<h2 id="vnstat">安装vnStat</h2>
+
+<pre><code>wget http://humdi.net/vnstat/vnstat-1.11.tar.gz
+tar zxvf vnstat-1.11.tar.gz
+cd vnstat-1.11
+make &amp;&amp; make install</code></pre>
+
+<h2 id="vnstat-php-frontend">安装vnStat PHP frontend</h2>
+
+<pre><code>wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
+cp -r vnstat_php_frontend-1.5.1 /path/to/nginx/vnstat</code></pre>
+
+<p>然后就可以通过访问http://www.yourdomain.com/vnstat，应该就可以看到流量数据页面了，但是现在还没有数据，接下来我们来给系统生成数据。</p>
+
+<h2 id="section">建立流量数据库</h2>
+
+<p>首先查看你是哪种外网网卡：</p>
+
+<pre><code>ifconfig    #Xen一般是eth0；OpenVZ一般是venet0</code></pre>
+
+<p>然后生成数据库：</p>
+
+<pre><code>/usr/bin/vnstat -u -i venet0  #因为我的VPS是基于OpenVZ的，所以就是venet0</code></pre>
+
+<p>配置通过cron的方式定时更新数据库,编辑/etc/cron.d/vnstat文件，加入下面的内容：</p>
+
+<pre><code>0-55/5 * * * *   root   vnstat -u -i venet0
+0-55/5 * * * *   root   vnstat --dumpdb -i venet0 &gt;/var/lib/vnstat/vnstat_dump_venet0</code></pre>
+
+<p>注意：第二行是为了更新venet0的数据后，dump出来一个文件提供给PHP访问.这里dump出来的vnstat_dump_venet0文件名是有规定的。</p>
+
+<p>修改配置文件，编辑/path/to/nginx/vnstat/config.php</p>
+
+<pre><code>$language = 'en';
+$iface_list = array('venet0');
+$iface_title['venet0'] = 'VPS';
+$data_dir = '/var/lib/vnstat/';
+$graph_format='png';</code></pre>
+
+<p>到这里安装就都完成了，就这么简单。现在访问www.yourdomain.com/vnstat就会发现有流量统计了,统计数据更新是５分钟刷新一次。</p>
+
+
+
+<br><br>
+
+<div id="disqus_thread" style="width:700px"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'zhixingheyi'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr>
+
+Zhixingheyi - <a href="http://liuxuan.info">http://liuxuan.info/</a>
+</div>
+
+<script src="/javascript/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17293168-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+  var sc_project=8495631;
+  var sc_invisible=1;
+  var sc_security="5b0817e1";
+  var scJsHost = (("https:" == document.location.protocol) ?
+  "https://secure." : "http://www.");
+  document.write("<sc"+"ript type='text/javascript' src='" +
+  scJsHost +
+  "statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript>
+  <div class="statcounter"><a title="website
+  statistics" href="http://statcounter.com/"
+  target="_blank"><img class="statcounter"
+  src="https://c.statcounter.com/8495631/0/5b0817e1/1/"
+  alt="website statistics"></a></div>
+</noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</body>
+</html>

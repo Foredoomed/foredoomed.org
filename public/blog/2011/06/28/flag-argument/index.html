@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Foredoomed">
+  <meta name="generator" content="jekyll">
+  <meta name="description" content="The homepage of Zhixingheyi">
+  <link href="favicon.ico" rel="icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/css/highlight.css" type="text/css">
+  <title></title>
+</head>
+
+<body>
+
+<div style="width:700px">
+  <h1>方法的标记参数</h1>
+
+<em>By Foredoomed on <time date="2011-06-28 15:16:00 +0800">June 28, 2011</time></em>
+
+<p>Martin Fowler在他的博客里发表了一篇关于方法的标志参数（Flag Argument）的博文，原文参见<a href="http://martinfowler.com/bliki/FlagArgument.html" title="http://martinfowler.com/bliki/FlagArgument.html">这里</a>。</p>
+
+<p>我读完后立刻开始回忆起我以前的做法来，假设有这样一个场景，我们有两类人（即有钱人和穷人），现在房地产那边需要定义个买房子的方法，如果是有钱人就能买房；反之，如果是穷人则买不了房子。好了，如果是我的话，我想我会这么定义：</p>
+
+<pre><code>public Customer buyHouse(Customer customer, boolean isRich){
+    //do something
+}</code></pre>
+
+<p>这种作法非常简单，只要在这个方法里再根据这个布尔值判断一下就行了。但是在我看完这篇博文后，我的想法发生了比较大的改变。这样定义方法虽然简单，但对于阅读代码的人来说却很头大。如果结合真实情况来看，这个<strong>isRich</strong>参数在大多数情况下都要通过调用另外一个方法计算出来再传入这个方法。也就是说，在调用这个方法的时候，<strong>isRich</strong>是<strong>True</strong>还是<strong>False</strong>是不确定的。</p>
+
+<p>这样做有问题吗？按照Martin Fowler在博文上写的，他偏向于定义两个方法来处理这种情况，即：</p>
+
+<pre><code>public Customer richesCanBuyHouse(Customer customer){...}
+public Customer poorsCantBuyHouse(Customer customer){...}</code></pre>
+
+<p>Martin Fowler的理由是调用这个方法的时候，就能清楚的知道程序员的意图，而不是要记住这个标记参数的意义。经过思考和实验，我发现将方法中的功能尽量单一化的做法将使整个系统收益，不仅可以提高测试覆盖率，易于定位bug，而且还易于修改和重构。</p>
+
+<p>Martin Fowler还举了另外一个例子，即布尔值的Set方法：</p>
+
+<pre><code>//提倡这种做法
+void setOn();
+void setOff();
+
+//而不是这种做法
+void setSwitch(boolean on);</code></pre>
+
+<p>这个例子其实和上面的例子差不多，虽然多了一个方法，但是程序将会变得清晰易读。</p>
+
+
+
+<br><br>
+
+<div id="disqus_thread" style="width:700px"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'zhixingheyi'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr>
+
+Zhixingheyi - <a href="http://liuxuan.info">http://liuxuan.info/</a>
+</div>
+
+<script src="/javascript/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17293168-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+  var sc_project=8495631;
+  var sc_invisible=1;
+  var sc_security="5b0817e1";
+  var scJsHost = (("https:" == document.location.protocol) ?
+  "https://secure." : "http://www.");
+  document.write("<sc"+"ript type='text/javascript' src='" +
+  scJsHost +
+  "statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript>
+  <div class="statcounter"><a title="website
+  statistics" href="http://statcounter.com/"
+  target="_blank"><img class="statcounter"
+  src="https://c.statcounter.com/8495631/0/5b0817e1/1/"
+  alt="website statistics"></a></div>
+</noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Foredoomed">
+  <meta name="generator" content="jekyll">
+  <meta name="description" content="The homepage of Zhixingheyi">
+  <link href="favicon.ico" rel="icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/css/highlight.css" type="text/css">
+  <title></title>
+</head>
+
+<body>
+
+<div style="width:700px">
+  <h1>Java的四种引用类型</h1>
+
+<em>By Foredoomed on <time date="2011-03-05 14:58:00 +0800">March  5, 2011</time></em>
+
+<p>在Java中有四种引用类型，他们是：强引用(Strong Reference)，软引用(Soft Reference)，弱引用(Weak Reference) 和 虚引用(Phantom Reference)。</p>
+
+<h2 id="section">四种引用类型的解释</h2>
+<ul>
+<li>JVM会持有一般对象直到他们不再是可触及的状态。换句话说，当没有任何有效引用指向他们的时候会被垃圾回收，无效引用不会被计算在内。</li>
+<li>软引用指向的对象会在不存在任何指向他们的引用并且内存空间不足情况下被垃圾收集。大多数情况下被用来实现内存敏感的缓存。没有GC的时间限制，会在OOM发生之前清理完毕。</li>
+<li>弱引用指向的对象会在没有任何引用指向他们的时候立即被垃圾收集。如果一个对象只有弱引用的话，那么这个对象是不可触及的。这些对象会在任何时候被垃圾收集并且会在下一个GC周期里被丢弃。</li>
+<li>虚引用指向的是已经执行finalize方法，但是还没有回收内存的对象。</li>
+</ul>
+
+<h2 id="section-1">四种引用类型的比较</h2>
+
+<table border="1">
+<tr>
+<td colspan="5" style="text-align:center;">Strong vs Soft vs Weak vs Phantom References
+</td>
+</tr>
+<tr>
+<td style="text-align:center">类型</td>
+<td style="text-align:center">目的</td>
+<td style="text-align:center">作用</td>
+<td style="text-align:center">触发GC条件</td>
+<td style="text-align:center">实现类</td>
+</tr>
+<tr>
+<td>强引用</td>
+<td>普通引用类型，只要对象的引用是强引用，他们就不会被垃圾收集</td>
+<td>普通引用</td>
+<td>任何对象如果不是强引用都可以被垃圾收集</td>
+<td>默认类型</td>
+</tr>
+<tr>
+<td>软引用</td>
+<td>在内存足够的时候，对象不会被垃圾收集</td>
+<td>为了保证即使对象没有任何引用指向它的时候也不会被垃圾收集，防止有引用再次指向这个对象</td>
+<td>在第一次GC后，JVM需要回收更多的空间</td>
+<td>java.lang.ref.SoftReference</td>
+</tr>
+<tr>
+<td>弱引用</td>
+<td>在对象可触及的状态下不会被垃圾收集</td>
+<td>如果对象不再被引用会被自动回收</td>
+<td>GC后对象只有弱引用</td>
+<td>java.lang.ref.WeakReference
+<br />
+java.util.WeakHashMap</td>
+</tr>
+<tr>
+<td>虚引用</td>
+<td>让你可以清理已经执行finalize方法，但是还没有回收内存的对象</td>
+<td>特殊清理</td>
+<td>finalize方法执行之后</td>
+<td>java.lang.ref.PhantomReference</td>
+</tr>
+
+</table>
+
+
+<br><br>
+
+<div id="disqus_thread" style="width:700px"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'zhixingheyi'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr>
+
+Zhixingheyi - <a href="http://liuxuan.info">http://liuxuan.info/</a>
+</div>
+
+<script src="/javascript/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17293168-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+  var sc_project=8495631;
+  var sc_invisible=1;
+  var sc_security="5b0817e1";
+  var scJsHost = (("https:" == document.location.protocol) ?
+  "https://secure." : "http://www.");
+  document.write("<sc"+"ript type='text/javascript' src='" +
+  scJsHost +
+  "statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript>
+  <div class="statcounter"><a title="website
+  statistics" href="http://statcounter.com/"
+  target="_blank"><img class="statcounter"
+  src="https://c.statcounter.com/8495631/0/5b0817e1/1/"
+  alt="website statistics"></a></div>
+</noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</body>
+</html>

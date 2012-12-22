@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Foredoomed">
+  <meta name="generator" content="jekyll">
+  <meta name="description" content="The homepage of Zhixingheyi">
+  <link href="favicon.ico" rel="icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/css/highlight.css" type="text/css">
+  <title></title>
+</head>
+
+<body>
+
+<div style="width:700px">
+  <h1>浏览器是如何工作的(四)</h1>
+
+<em>By Foredoomed on <time date="2011-12-10 14:18:00 +0800">December 10, 2011</time></em>
+
+<h2 id="html">3.2 HTML解析器</h2>
+
+<p>HTML解析器的工作是把HTML标记语言解析成为解析树。</p>
+
+<h3 id="html-1">3.2.1 HTML语法定义</h3>
+
+<p>HTML的词汇和语法是由W3C组织制定的。当前的版本是HTML4，HTML5还在制定当中。</p>
+
+<h3 id="html-2">3.2.2 不是内容无关语法的HTML</h3>
+
+<p>我们在介绍解析的时候知道了，语法可以被定义为正式使用的格式，比如BNF。</p>
+
+<p>不过不幸的是，所有约定的解析器都不适用于HTML。HTML不能简单的定义一个解析器需要的内容无关语法。</p>
+
+<p>有一个定义HTML的正式格式 - DTD，但它也不是内容无关语法。</p>
+
+<p>所以第一眼看上去就很奇怪，HTML更接近于XML。而XML的解析器却有很多，而且有一个HTML的XML版本 - XHTML，那么有什么不同呢？</p>
+
+<p>不同之处在于，HTML的方式更加宽松，它允许你省略特定的标签，然后会隐式的为你加上去。总的来看，相对于XML来说，HTML是“软”语法。</p>
+
+<p>显然，这个细小的差别让两者大不一样。一方面这是HTML流行的主要原因 - 允许你犯错，而且对于开发人员来说非常容易。另一方面，它有使的写一个正式语法变得非常困难。所以总结来看 - HTML不能被简单的解析，不能被约定的解析器解析，因为它不是内容无关语法，也不能被XML解析器解析。</p>
+
+<h3 id="html-dtd">3.2.3 HTML DTD</h3>
+
+<p>HTML的定义是一个DTD的格式。这个格式被用来定义<a href="http://en.wikipedia.org/wiki/Standard_Generalized_Markup_Language" title="SGML">SGML</a>家族语言。它包含了对所以允许元素的定义，他们的属性和继承关系。我们已经知道，HTML DTD不能形成一个内容无关语法。</p>
+
+<p>还有一些类型的DTD。像严格的类型会紧密遵守规范，但其他类型包含对以前浏览器使用的标签的支持，这个目的就是向后兼容旧内容。当前的严格版DTD在<a href="http://www.w3.org/TR/html4/strict.dtd" title="strict dtd">这里</a>。</p>
+
+<h3 id="dom">3.2.4 DOM</h3>
+
+<p>输出树(也就是解析树)，它包含了DOM元素和属性节点。像JavaScript一样，它是HTML文档和元素借口对外界的对象表示。</p>
+
+<p>这棵树的根节点是<a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core.html#i-Document" title="Document">Document</a>对象。</p>
+
+<p>DOM是大多数情况下是一对一关系的标记。比如：</p>
+
+<pre><code>&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      Hello World
+    &lt;/p&gt;
+    &lt;div&gt; &lt;img src=&quot;example.png&quot;/&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>会被解析成下面这棵树：</p>
+
+<p><img src="http://farm8.staticflickr.com/7155/6485284597_9b1d73e56d.jpg&quot; width=&quot;400&quot; height=&quot;219&quot;" alt="dom tree" /></p>
+
+<p>像HTML一样，DOM是由W3C组织定义的，参考<a href="http://www.w3.org/DOM/DOMTR" title="DOM">这里</a>。这是一个处理文档的通用的规范。特殊的模块解释特殊的HTML元素。HTML的定义可以参考<a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/idl-definitions.html" title="html">这里</a></p>
+
+<p>我所说的解析树包含DOM节点的意思是，这棵树是由实现某个DOM接口的元素组成的，而浏览器在内部有包含其他属性的具体实现。</p>
+
+<h3 id="section">3.2.5 解析算法</h3>
+
+<p>在上一节里我们看到，HTML不能被自上而下或者自下而上的解析器解析。其中的原因是：</p>
+
+<ol>
+  <li>HTML的容错特性</li>
+  <li>浏览器有传统的错误来支持为人熟知的非法HTML</li>
+  <li>解析过程是重复进出的，一般情况下源代码不会改变，但是在HTML中，包含document.write 的标签会另外加入标记，所以解析过程实际上会改变输入。</li>
+</ol>
+
+<p>因为不能使用一般的解析技术，所以浏览器就为HTML开发了专用的解析器。</p>
+
+<p>解析算法详细的定义在<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html">HTML5规范</a>里，算法是由二阶段标记和构建树组成。标记是在词法分析阶段处理，把输入解析成标记。HTML标记有开始标签，结束标签，属性名和属性值。</p>
+
+<p>标记器可以识别标记，并且把他们传给树构造器，然后再处理下一个标记直到输入结束。</p>
+
+<p><img src="http://farm8.staticflickr.com/7150/6485330329_01565f62ab.jpg&quot; width=&quot;308&quot; height=&quot;400&quot;" alt="parsing flow" /></p>
+
+
+
+<br><br>
+
+<div id="disqus_thread" style="width:700px"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'zhixingheyi'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr>
+
+Zhixingheyi - <a href="http://liuxuan.info">http://liuxuan.info/</a>
+</div>
+
+<script src="/javascript/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17293168-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+  var sc_project=8495631;
+  var sc_invisible=1;
+  var sc_security="5b0817e1";
+  var scJsHost = (("https:" == document.location.protocol) ?
+  "https://secure." : "http://www.");
+  document.write("<sc"+"ript type='text/javascript' src='" +
+  scJsHost +
+  "statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript>
+  <div class="statcounter"><a title="website
+  statistics" href="http://statcounter.com/"
+  target="_blank"><img class="statcounter"
+  src="https://c.statcounter.com/8495631/0/5b0817e1/1/"
+  alt="website statistics"></a></div>
+</noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</body>
+</html>

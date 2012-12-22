@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Foredoomed">
+  <meta name="generator" content="jekyll">
+  <meta name="description" content="The homepage of Zhixingheyi">
+  <link href="favicon.ico" rel="icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/css/highlight.css" type="text/css">
+  <title></title>
+</head>
+
+<body>
+
+<div style="width:700px">
+  <h1>Objective-C学习笔记</h1>
+
+<em>By Foredoomed on <time date="2011-02-24 14:26:00 +0800">February 24, 2011</time></em>
+
+<h2 id="section">基本数据类型</h2>
+
+<p><img src="http://farm6.static.flickr.com/5214/5488573123_a7dfd0551c_z.jpg" alt="基本数据类型" title="基本数据类型" /></p>
+
+<p><img src="http://farm6.static.flickr.com/5176/5488563233_153dd27348_z.jpg" alt="基本数据类型" title="基本数据类型" /></p>
+
+<p>id : 可以保存任何类型的对象，也就是对象的泛型类型。(id类型非常重要，因为他是Objective-C中的重要特性多态和动态绑定的基础)</p>
+
+<h2 id="section-1">类,对象和函数</h2>
+
+<p>(1) 函数调用方式</p>
+
+<p>[ ClassOrInstance method ] 也可以理解为： [ receiver message ]</p>
+
+<p>(2) 类的声明与实现</p>
+
+<p>@interface是类的声明关键字，一般的格式为：</p>
+
+<pre><code>@interface NewClassName: ParentClassName 
+{ 
+    memberDeclarations; 
+}  
+methodDeclarations; 
+@end</code></pre>
+
+<p>@implementation是类的实现关键字，一般的格式为：</p>
+
+<pre><code>@implementation NewClassName 
+    methodDefinitions; 
+@end</code></pre>
+
+<p>(3) 自动生成类属性的setter和getter函数的方法</p>
+
+<p>先在类的声明里用<strong>@property</strong>关键字定义类的属性，然后在类实现文件中用<strong>@synthesize</strong>关键字。</p>
+
+<p>(4) self： 本类的实例</p>
+
+<p>(5) @class： 可以让编译器知道要引用的类的类型，但如果用到类中的属性或函数，那就要用 #import “XXX.h“ 来代替。</p>
+
+<p>(6) 如果某个对象调用继承自NSObject中的release函数，那么这个对象只会在没有任何引用的情况下才会释放内存，release函数通过调用实际释放内存的 dealloc函数来实现释放内存的操作(不要重写release函数，而是重写dealloc函数)。</p>
+
+<p>(6) 异常捕获</p>
+<pre><code>@try { 
+  statement 
+  statement 
+  ... 
+} 
+@catch (NSException *exception) { 
+  statement 
+  statement 
+  ... 
+}</code></pre>
+
+<p>(7) volatile： 防止编译器优化看似多余的变量赋值</p>
+
+<p>(8) @protocol： 类似于Java中的接口，跟在@interface后尖括号（&lt; …&gt;）中。声明在@protocol中的函数必须实现，而声明在@optional中的函数可以不实现。</p>
+
+<p>(9) 属性特性</p>
+
+<p><img src="http://farm6.static.flickr.com/5180/5488588537_1f41be3c8e_z.jpg" alt="属性特性" title="属性特性" /></p>
+
+
+<br><br>
+
+<div id="disqus_thread" style="width:700px"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'zhixingheyi'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<hr>
+
+Zhixingheyi - <a href="http://liuxuan.info">http://liuxuan.info/</a>
+</div>
+
+<script src="/javascript/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17293168-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+  var sc_project=8495631;
+  var sc_invisible=1;
+  var sc_security="5b0817e1";
+  var scJsHost = (("https:" == document.location.protocol) ?
+  "https://secure." : "http://www.");
+  document.write("<sc"+"ript type='text/javascript' src='" +
+  scJsHost +
+  "statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript>
+  <div class="statcounter"><a title="website
+  statistics" href="http://statcounter.com/"
+  target="_blank"><img class="statcounter"
+  src="https://c.statcounter.com/8495631/0/5b0817e1/1/"
+  alt="website statistics"></a></div>
+</noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</body>
+</html>
