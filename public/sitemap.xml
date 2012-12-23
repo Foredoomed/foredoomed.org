@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+      <loc>/blog/2012/12/23/comparison-of-raid/</loc>
+      <lastmod>2012-12-23</lastmod>
+      <changefreq>never</changefreq>
+  </url>
+  <url>
       <loc>/blog/2012/10/21/hashing-myths/</loc>
       <lastmod>2012-10-21</lastmod>
       <changefreq>never</changefreq>
@@ -228,6 +233,11 @@
   <url>
       <loc>/blog/2011/05/19/block-advertising-on-youku-and-tudou/</loc>
       <lastmod>2011-05-19</lastmod>
+      <changefreq>never</changefreq>
+  </url>
+  <url>
+      <loc>/blog/2011/05/14/the-best-timetable-for-health-in-the-world/</loc>
+      <lastmod>2011-05-14</lastmod>
       <changefreq>never</changefreq>
   </url>
   <url>

@@ -54,7 +54,7 @@ wget ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick.tar.gz
 wget http://pecl.php.net/get/imagick-3.0.1.tgz
 {% endhl %}
 
-### 编译安装MySQL
+### 安装MySQL
 
 首先添加mysql用户组和用户：
 
@@ -224,7 +224,7 @@ vim /etc/rc.local
 /usr/local/webserver/mysql/bin/mysqld_safe --defaults-file=/usr/local/webserver/mysql/my.cnf &
 {% endhl %}
 
-## 编译安装PHP
+## 安装PHP
 
 首先创建一个用户和组(用来管理PHP/Nginx/Wordpress)
 创建用户和组
@@ -418,7 +418,7 @@ vim /etc/rc.local
 /usr/local/webserver/php/sbin/php-fpm
 {% endhl %}
 
-## 编译安装Nginx
+## 安装Nginx
 
 首先编译安装Nginx所需的pcre库：
 

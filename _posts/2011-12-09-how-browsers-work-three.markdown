@@ -11,7 +11,7 @@ date: 2011-12-09 23:54
 
 实例 - 2 + 3 - 1 这个表达式的解析结果会返回下面的树：
 
-![paring tree](http://farm8.staticflickr.com/7158/6481798259_420d333218.jpg" width="400" height="155")
+![treenode](http://i1256.photobucket.com/albums/ii494/Foredoomed/treenode_zpscefcac73.png "treenode")
 
 ### 3.1.1 语法
 
@@ -27,7 +27,7 @@ date: 2011-12-09 23:54
 
 分析器一般由它的两个组件承担不同的工作。一个是lexer(有时也会被称为tokenizer)，它主要是把输入分解成合法的标记。另一个是parser，它主要是根据语言的语法规则，分析文档构建解析树。lexer知道怎么消除不相关的字符，像空格符和还行符。
 
-![paring tree](http://farm8.staticflickr.com/7011/6481889667_2fe7dd07cb.jpg" width="101" height="300")
+![parsetree](http://i1256.photobucket.com/albums/ii494/Foredoomed/parsetrees_zpsb0daa7a0.png "parsetree")
 
 解析的过程是迭代式的。parser一般会向lexer请求一个新的标记，然后尝试用语法规则来匹配这个标记。如果匹配一个规则，跟这个标记对应的节点会被加入到解析树，然后请求另一个标记。
 
@@ -37,11 +37,11 @@ date: 2011-12-09 23:54
 
 大多数情况下，解析树不是最终的成品。解析在翻译中经常被用到，把输入文档转换成另一种格式。一个例子就是编译。编译器是把源代码编译成为机器代码，首先解析为解析树，然后把解析树翻译成为机器代码稳定。
 
-![compilation flow](http://farm8.staticflickr.com/7026/6481955767_7abc1f157b.jpg" width="104" height="400")
+![compilation flow](http://i1256.photobucket.com/albums/ii494/Foredoomed/compilationflow_zps51a943ee.png "compilation flow")
 
 ### 3.1.4 解析实例
 
-让我们试着定义一个简单的数学语言，然后分析表达式`2 + 3 - 1`解析结果。
+让我们试着定义一个简单的数学语言，然后分析表达式 2 + 3 - 1解析结果。
 
 词汇：可以有整数，加号和减号。
 
@@ -83,7 +83,7 @@ term := INTEGER | expression
 
 让我们来看一下两种类型的解析器是如何解析我们的例子的：
 
-自上而下的解析器从更高层次的规则开始：它会先确定`2 + 3`是一个表达式，然后再确定`2 + 3 + 1`是一个表达式(确定表达式的过程涉及其他的规则匹配，但是起点是最高层次的规则)。
+自上而下的解析器从更高层次的规则开始：它会先确定 2 + 3 是一个表达式，然后再确定 2 + 3 + 1 是一个表达式(确定表达式的过程涉及其他的规则匹配，但是起点是最高层次的规则)。
 
 而自下而上的表达式会扫描输入，直到有一个规则匹配。然后把匹配的输入换成规则，这个过程会持续到输入的结尾。部分匹配的表达式会被放在解析栈中。
 

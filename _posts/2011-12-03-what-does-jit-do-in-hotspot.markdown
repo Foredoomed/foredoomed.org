@@ -5,8 +5,6 @@ date: 2011-12-03 15:15
 ---
 最近在网上看到一篇关JIT(Just in Time)的文章[Just in Time Compiler (JIT) in Hotspot](http://java.dzone.com/articles/just-time-compiler-jit-hotspot?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+javalobby%2Ffrontpage+%28Javalobby+%2F+Java+Zone%29&utm_content=Google+Reader "Just in Time Compiler (JIT) in Hotspot"),这篇文章很短，但是对JIT的作用基本上说的比较清楚的，可以作为JIT的学习参考，所以我就决定把这篇文章翻译成中文，供以后复习参考用。
 
-================正文开始==================
-
 ## 什么是JIT编译器
 
 JIT和更普便的自适应优化概念是在包括Java在内的许多编程语言，例如.Net, Lua, JRuby中所为人熟知的概念。

@@ -52,7 +52,7 @@ DOM是大多数情况下是一对一关系的标记。比如：
 
 会被解析成下面这棵树：
 
-![dom tree](http://farm8.staticflickr.com/7155/6485284597_9b1d73e56d.jpg" width="400" height="219")
+![dom tree](http://i1256.photobucket.com/albums/ii494/Foredoomed/domtree_zps0fff0edc.png "dom tree")
 
 像HTML一样，DOM是由W3C组织定义的，参考[这里](http://www.w3.org/DOM/DOMTR "DOM")。这是一个处理文档的通用的规范。特殊的模块解释特殊的HTML元素。HTML的定义可以参考[这里](http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/idl-definitions.html "html")
 
@@ -72,6 +72,6 @@ DOM是大多数情况下是一对一关系的标记。比如：
 
 标记器可以识别标记，并且把他们传给树构造器，然后再处理下一个标记直到输入结束。
 
-![parsing flow](http://farm8.staticflickr.com/7150/6485330329_01565f62ab.jpg" width="308" height="400")
+![parsing flow](http://i1256.photobucket.com/albums/ii494/Foredoomed/parsingflow_zps815c80cd.jpg "parsing flow")
 
 

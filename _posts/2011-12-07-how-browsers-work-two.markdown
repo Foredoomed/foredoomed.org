@@ -19,7 +19,7 @@ Webkit是开源的渲染引擎，它开始时只是针对Linux平台，后来由
 
 渲染引擎是从网络层中获取请求的内容。然后是渲染的基本流程：
 
-![flow](http://farm8.staticflickr.com/7012/6465898245_abf04a9566.jpg" width="500" height="55")
+![flow](http://i1256.photobucket.com/albums/ii494/Foredoomed/flow_zps833bd91a.png "flow")
 
 渲染引擎会开始解析HTML文档，并且把HTML标签转换成为被称作“内容树(content tree)”的DOM节点。还会解析不管是外部引用的还是内联的CSS。样式和可视指令(visual instructions)一起会被创建成为另一棵树-渲染树(render tree)。
 
@@ -29,9 +29,9 @@ Webkit是开源的渲染引擎，它开始时只是针对Linux平台，后来由
 
 ### 2.3 主要流程实例
 
-![webkitflow](http://farm8.staticflickr.com/7151/6465898595_b573cc3861.jpg" width="500" height="232")
+![webkitflow](http://i1256.photobucket.com/albums/ii494/Foredoomed/webkitflow_zpsca40fa56.png "webkitflow")
 
-![geckoflow](http://farm8.staticflickr.com/7018/6465898835_b5e5658f50.jpg" width="500" height="232")
+![Geckoflow](http://i1256.photobucket.com/albums/ii494/Foredoomed/pagespeed_zps5b97199c.jpg "Geckoflow")
 
 从上两张图山可以看到，尽管Webkit和Gecko使用不同的术语，但是整个流程是基本一样的。
 

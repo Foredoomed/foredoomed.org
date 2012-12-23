@@ -49,7 +49,7 @@ date: 2011-12-05 23:03
 6. JavaScript解释器 - 解析和执行JavaScript代码
 7. 数据存储 - 这是一个持久层，浏览器需要保存所有类型的数据到硬盘上，比如cookie。而HTML5规定了浏览器的数据库web database。
 
-![layers](http://farm8.staticflickr.com/7172/6459942245_401c8ce2ac.jpg" "layers")
+![layers](http://i1256.photobucket.com/albums/ii494/Foredoomed/layers_zps14cc9cb9.png "layers")
 
 需要注意的是，Chrome跟大多数浏览器不一样的是，它会有多个渲染引擎的实例，每个标签页都有一个渲染引擎，每个标签页是个独立的进程。
 

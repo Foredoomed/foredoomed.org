@@ -35,7 +35,7 @@
 
 <p>我们现在回到了”<strong>Tag open state</strong>”状态。下面一个遇到的字符是/，这会导致创建 end tag token 并且状态改变为”<strong>Tag name state</strong>”。同样，这个状态持续到遇到 &gt; 字符。然后新的标签会被释放，回到”<strong>Data state</strong>”状态。&lt;/html&gt;标签是同样的处理流程。</p>
 
-<p><img src="http://farm8.staticflickr.com/7145/6485458369_9f574b3101.jpg&quot; width=&quot;500&quot; height=&quot;309&quot;" alt="tokenizing state machine" /></p>
+<p><img src="http://i1256.photobucket.com/albums/ii494/Foredoomed/tokenizing_zps056f885c.png" alt="tokenizing" title="tokenizing" /></p>
 
 <h3 id="section-1">3.2.7 树的构造算法</h3>
 
@@ -59,7 +59,7 @@
 
 <p>如果碰到body的关闭标记的话会使模式转入”<strong>after body</strong>”。然后碰到html关闭标签，模式转换成”<strong>after after body</strong>“。碰到文件结束标记后，解析结束。</p>
 
-<p><img src="http://farm8.staticflickr.com/7156/6485575299_706ab0d663.jpg&quot; width=&quot;346&quot; height=&quot;500&quot;" alt="tree construction" /></p>
+<p><img src="http://i1256.photobucket.com/albums/ii494/Foredoomed/treeconstruction_zpsd983ece9.gif" alt="tree construction" title="tree construction" /></p>
 
 <h3 id="section-2">3.2.8 解析结束后</h3>
 

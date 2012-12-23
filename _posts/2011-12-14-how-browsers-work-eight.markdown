@@ -62,7 +62,7 @@ style对象有对应于视觉属性的属性，如果属性没有对应的规则
 
 当有多个定义的时候问题就来了，解决这个问题靠的是层级顺序。
 
-样式表的层级顺序
+#### 样式表的层级顺序
 
 style属性的声明可以在多个样式表中被声明，有时在一个样式表中，这意味着应用规则的顺序变得非常重要。这被称为层级顺序，根据CSS2的规范说明，层级顺序是(从低到高)：
 
@@ -74,7 +74,7 @@ style属性的声明可以在多个样式表中被声明，有时在一个样式
 
 浏览器定义是最不重要的，用户定义的样式如果被标记为重要的就可以覆盖开发者定义的样式。如果是相同顺序的定义会被[特征(specificity)](http://www.html5rocks.com/en/tutorials/internals/howbrowserswork/#Specificity "specificity")排序，经过排序后的顺序是特征化的。HTML视觉属性被翻译成匹配的CSS声明，他们是以低优先级的开发者规则被对待的。
 
-特征(Specificity)
+#### 特征(Specificity)
 
 选择器的特征在[CSS2规范](http://www.w3.org/TR/CSS2/cascade.html#specificity "CSS2")中被定义为：
 
@@ -102,9 +102,9 @@ style属性的声明可以在多个样式表中被声明，有时在一个样式
  style=""          /* a=1 b=0 c=0 d=0 -> specificity = 1,0,0,0 */
 {% endhl %}
 
-规则排序
+#### 规则排序
 
-在所有的规则匹配之后，他们会根据层级规则被排序。Webkit使用冒泡排序法对小的集合排序，用归并排序法对大的集合排序。Webkit依靠重写`>`操作符来实现排序：
+在所有的规则匹配之后，他们会根据层级规则被排序。Webkit使用冒泡排序法对小的集合排序，用归并排序法对大的集合排序。Webkit依靠重写>操作符来实现排序：
 
 {% hl %}
 static bool operator >(CSSRuleData& r1, CSSRuleData& r2)

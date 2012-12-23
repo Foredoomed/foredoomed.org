@@ -64,7 +64,7 @@ CSS的盒子模型描述的是在文档树中为元素生成的矩形盒子，�
 
 每个盒子有一个内容区域(比如：文字，图片等)和可选的padding，border以及margin区域。
 
-![box model](http://farm8.staticflickr.com/7005/6505395185_30710fe726.jpg" width="500" height="342")
+![box model](http://i1256.photobucket.com/albums/ii494/Foredoomed/boxmodel_zps5e97b08d.jpg "box model")
 
 每个节点都会生成0到n个这样的盒子。所有的元素都有一个display属性，这个属性决定了要生成盒子的类型。例如：
 
@@ -100,19 +100,19 @@ scheme的位置是通过设置position属性和float属性来确定的。
 
 Block：在浏览器窗口中有自己的矩形区域
 
-![block box](http://farm8.staticflickr.com/7018/6505506095_ba7907c252_m.jpg" width="150" height="127")
+![block box](http://i1256.photobucket.com/albums/ii494/Foredoomed/blockbox_zpsafde709e.png "block box")
 
 Inline：没有自己的block，但是被其他block包含
 
-![inline box](http://farm8.staticflickr.com/7029/6505521245_8a3aee3173_m.jpg" width="240" height="186")
+![inline box](http://i1256.photobucket.com/albums/ii494/Foredoomed/inlinebox_zps5e116bc8.png "inline box")
 
 Block垂直方向上一个排列，Inline在水平方向上排列
 
-![block and inline formatting](http://farm8.staticflickr.com/7003/6505539833_92df259ca6_m.jpg" width="240" height="222")
+![block and inline formatting](http://i1256.photobucket.com/albums/ii494/Foredoomed/blockandinlineformatting_zps4f77a12c.png "block and inline formatting")
 
 Inline盒子被放在一行行中，所以又叫”line boxes”。行的高度至少要和最高的盒子一样，但是可以更高。当盒子和基准行(baseline)对齐时，意味着元素的底部和其他盒子不是底部的某个点对齐。为了防止容器的宽度不够，inline的盒子会被放在多行中，这一般发生在有段落的情况下。
 
-![lines](http://farm8.staticflickr.com/7160/6505571567_7834c0cae3_m.jpg" width="240" height="166")
+![lines](http://i1256.photobucket.com/albums/ii494/Foredoomed/lines_zpsb36ddb74.png "lines")
 
 ### 9.5 确定位置
 
@@ -120,7 +120,7 @@ Inline盒子被放在一行行中，所以又叫”line boxes”。行的高度�
 
 相对位置是：先像通常一样放置，然后根据差异移动。
 
-![relative positioning](http://farm8.staticflickr.com/7010/6505597613_10dab9cd61_m.jpg" width="240" height="125")
+![relative positioning](http://i1256.photobucket.com/albums/ii494/Foredoomed/relativepasitioning_zpsa52dd16e.png "relative positioning")
 
 #### 9.5.2 漂浮盒子
 
@@ -135,13 +135,13 @@ Inline盒子被放在一行行中，所以又叫”line boxes”。行的高度�
 
 的结果会是下面这个样子：
 
-![float](http://farm8.staticflickr.com/7160/6505635961_734095bce0_m.jpg" width="240" height="110")
+![float](http://i1256.photobucket.com/albums/ii494/Foredoomed/float_zps6781931b.png "float")
 
 #### 9.5.3 绝对和固定盒子
 
 绝对和固定盒子的定义独立于普通流，元素也不参与普通流，它的维度是相对于容器的。固定盒子的容器是viewport。
 
-![fixed positioning](http://farm8.staticflickr.com/7164/6505656271_8a14ca32f2_m.jpg" width="240" height="165")
+![fixed positioning](http://i1256.photobucket.com/albums/ii494/Foredoomed/fixedpositioning_zpsf4c26c05.png "fixed positioning")
 
 注意：固定盒子不会移动，即使下拉窗口！
 
@@ -173,7 +173,7 @@ Inline盒子被放在一行行中，所以又叫”line boxes”。行的高度�
 结果会是下面这个样子：
 
 
-![fixed positioning](http://farm8.staticflickr.com/7021/6505743937_a87c962997_m.jpg" width="240" height="214")
+![fixed positioning](http://i1256.photobucket.com/albums/ii494/Foredoomed/fixedpositioning2_zpsaab87119.png "fixed positioning")
 
 尽管红色div声明在绿色之前而且会被首先绘制，但是它z-index属性值更大，所以它在根盒子持有的堆中位置更靠前。
 

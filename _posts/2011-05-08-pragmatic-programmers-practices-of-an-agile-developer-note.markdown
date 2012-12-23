@@ -110,7 +110,7 @@ date: 2011-05-08 21:26
 
 43.Share Code Only When Ready
 
-**Review Code**（现在越发觉得这个的重要性）
+**44.Review Code**（现在越发觉得这个的重要性）
 
 45.Keep Others Informed
 

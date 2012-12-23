@@ -18,35 +18,37 @@ date: 2011-02-10 14:04
 好了，上面只是文字上的解释，我们来看一下第一类函数的例子：
 
 1. 第一类函数赋值给变量，这个函数的作用是对每个Int类型的值都加1：
-{% hl %}
-var increase = (x : Int) => x + 1
-{% endhl %}
+	{% hl %}
+	var increase = (x : Int) => x + 1
+	{% endhl %}
 
 2. 第一类函数作为参数传给另一个函数，这个函数的作用是打印集合中的每个元素：
-{% hl %}
-List.foreach((x : Int) => println(x))
-{% endhl %}
+	{% hl %}
+	List.foreach((x : Int) => println(x))
+	{% endhl %}
 
 3. 第一类函数作为返回值，这个函数的作用是对x求导：
-{% hl %}
-using System;
-class Program
-{
-    // f: function that takes a double and returns a double
-    // deltaX: small positive number
-    // returns a function that is an approximate derivative of f
-    static Func＜double , double＞ MakeDerivative(Func＜double , double＞ f, double deltaX)
-    {
-        return x => (f(x + deltaX) - f(x)) / deltaX;
-    }
-    static void Main()
-    {
-        var cos = MakeDerivative(Math.Sin, 0.00000001);
-        Console.WriteLine(cos(0));                    // 1
-        Console.WriteLine(cos(Math.PI / 2));          // 0
-    }
-}
-{% endhl %}
+	{% hl %}
+	using System;
+	
+	class Program
+	{
+      // f: function that takes a double and returns a double
+      // deltaX: small positive number
+      // returns a function that is an approximate derivative of f
+      static Func＜double , double＞ MakeDerivative(Func＜double , double＞ f, double deltaX)
+      {
+       	return x => (f(x + deltaX) - f(x)) / deltaX;
+      }
+    	
+      static void Main()
+      {
+    	var cos = MakeDerivative(Math.Sin, 0.00000001);
+    	Console.WriteLine(cos(0));                    // 1
+    	Console.WriteLine(cos(Math.PI / 2));          // 0
+      }
+	}
+	{% endhl %}
 
 我们再来看看**free variable（自由变量）**是个什么东西。维基上的解释是：自由变量是一个函数中的变量，并且既没有在上下文声明过，也不是函数的参数，并且会在函数的创建执行过程中被特定的值替换。lexical environment可以理解为变量的作用域。
 

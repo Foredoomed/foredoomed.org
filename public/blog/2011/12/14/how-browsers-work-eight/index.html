@@ -76,7 +76,7 @@ div {margin:5px}</code></pre>
 
 <p>当有多个定义的时候问题就来了，解决这个问题靠的是层级顺序。</p>
 
-<p>样式表的层级顺序</p>
+<h4 id="section-2">样式表的层级顺序</h4>
 
 <p>style属性的声明可以在多个样式表中被声明，有时在一个样式表中，这意味着应用规则的顺序变得非常重要。这被称为层级顺序，根据CSS2的规范说明，层级顺序是(从低到高)：</p>
 
@@ -90,7 +90,7 @@ div {margin:5px}</code></pre>
 
 <p>浏览器定义是最不重要的，用户定义的样式如果被标记为重要的就可以覆盖开发者定义的样式。如果是相同顺序的定义会被<a href="http://www.html5rocks.com/en/tutorials/internals/howbrowserswork/#Specificity" title="specificity">特征(specificity)</a>排序，经过排序后的顺序是特征化的。HTML视觉属性被翻译成匹配的CSS声明，他们是以低优先级的开发者规则被对待的。</p>
 
-<p>特征(Specificity)</p>
+<h4 id="specificity">特征(Specificity)</h4>
 
 <p>选择器的特征在<a href="http://www.w3.org/TR/CSS2/cascade.html#specificity" title="CSS2">CSS2规范</a>中被定义为：</p>
 
@@ -118,9 +118,9 @@ div {margin:5px}</code></pre>
  #x34y         {}  /* a=0 b=1 c=0 d=0 -&gt; specificity = 0,1,0,0 */
  style=&quot;&quot;          /* a=1 b=0 c=0 d=0 -&gt; specificity = 1,0,0,0 */</code></pre>
 
-<p>规则排序</p>
+<h4 id="section-3">规则排序</h4>
 
-<p>在所有的规则匹配之后，他们会根据层级规则被排序。Webkit使用冒泡排序法对小的集合排序，用归并排序法对大的集合排序。Webkit依靠重写<code>&gt;</code>操作符来实现排序：</p>
+<p>在所有的规则匹配之后，他们会根据层级规则被排序。Webkit使用冒泡排序法对小的集合排序，用归并排序法对大的集合排序。Webkit依靠重写&gt;操作符来实现排序：</p>
 
 <pre><code>static bool operator &gt;(CSSRuleData&amp; r1, CSSRuleData&amp; r2)
 {
@@ -129,7 +129,7 @@ div {margin:5px}</code></pre>
     return (spec1 == spec2) : r1.position() &gt; r2.position() : spec1 &gt; spec2; 
 }</code></pre>
 
-<h2 id="section-2">4.4 渐进的过程</h2>
+<h2 id="section-4">4.4 渐进的过程</h2>
 
 <p>Webkit使用一个标志来标记所有顶层样式表(包括@imports)被加载完成。如果在样式没有完全被加载时就去访问它，那么站位符就会被使并且在文档中被标记，在样式表被加载完成后重新计算。</p>
 

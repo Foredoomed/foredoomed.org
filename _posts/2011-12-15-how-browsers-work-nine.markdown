@@ -32,7 +32,7 @@ HTML使用的是基于布局模型的流，这意味着大多数时间内，单�
 
 当renderer被标记为脏时，增量布局被异步触发。例如在从网络上获取内容后，新renderer被附加到渲染树，并且被加入到DOM树中。
 
-![reflow](http://farm8.staticflickr.com/7167/6498973627_ca37c1cac5.jpg" width="326" height="341")
+![inremental layout](http://i1256.photobucket.com/albums/ii494/Foredoomed/incrementallayout_zps542fbc68.png "inremental layout")
 
 ### 5.3 异步和同步布局
 

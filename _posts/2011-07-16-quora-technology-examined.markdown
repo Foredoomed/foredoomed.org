@@ -6,8 +6,6 @@ date: 2011-07-16 15:43
 
 如果提起[Quora](http://www.quora.com "Quora"),国人首先想到的可能会是它在国内的山寨版[知乎](http://www.zhihu.com "知乎")。想当初知乎还因为它的条款问题引来网络上的一片骂声，这个事件倒是给我提了个醒，因为我以前基本上不看网站的条款声明，现在看来以后要看明白了再用啊（特别是山寨货），不然怎么死的都不知道。当然我关注的不是山寨货，而是它的本源Quora。 
 
-![Quora](http://farm7.static.flickr.com/6001/5943445558_12a1fc3061.jpg "Quora")
-
 Quora由Facebook前CTO亚当·德安杰洛（Adam D'Angelo）以及Facebook工程技术经理查理·切沃（Charlie Cheever）于2008年创立。2010年初开始内部测试的Quora在3月获得风险投资公司Benchmark Capital的1400万美元投资。据《华尔街日报》报道，估值为8750万美元。但是Quora目前还是执行着邀请制度，这导致它的PV相对于同类型的社交问答网站[Stack Overflow](http://stackoverflow.com "Stack Overflow")要少了很多。但这并不能阻止Quora的火爆，其高质量的回答和优秀的用户体验都是它的优势所在。
 
 作为我自己来讲，更多的还是关心Quora使用到的技术。它的性能为什么这么棒，它的架构是怎样的，它使用的是哪种语言和框架，它的搜索性能为什么这么好等。那就让我们来看看Quora到底用到了哪些技术。

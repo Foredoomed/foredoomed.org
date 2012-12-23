@@ -27,7 +27,7 @@
 
 <p>有些渲染对象对应于DOM节点，但不是在树中的相同位置。浮动元素和绝对固定位置的元素会被放置在树中的不同的位置，而且映射到实际的frame中去，所以它应该是有站位符的frame。</p>
 
-<p><img src="http://farm8.staticflickr.com/7156/6486727487_c447bed064.jpg&quot; width=&quot;500&quot; height=&quot;271&quot;" alt="render tree corresponding dom tree" /></p>
+<p><img src="http://i1256.photobucket.com/albums/ii494/Foredoomed/rendertree_zpsef9202b5.png" alt="render tree" title="render tree" /></p>
 
 <h2 id="section">4.2 构造树的流程</h2>
 
@@ -59,7 +59,7 @@
 }
 </code></pre>
 
-    <p>上面例子的样式意味着要应用到一个被3个div包含的<code>&lt;div&gt;</code>上去。假如你想检查这个规则被应用到了一个给定的div元素上，你需要选择某个路径向上查找。你可能会向上遍历节点树，发现只有2个div元素，然后尝试另一条路径。</p>
+    <p>上面例子的样式意味着要应用到一个被3个div包含的&lt;div&gt;上去。假如你想检查这个规则被应用到了一个给定的div元素上，你需要选择某个路径向上查找。你可能会向上遍历节点树，发现只有2个div元素，然后尝试另一条路径。</p>
   </li>
   <li>应用规则包括非常复杂的层级规则，它定义了规则的继承关系。</li>
 </ol>
@@ -71,7 +71,7 @@
 <p>Webkit的节点引用样式对象(RenderStyle)，这些对象可以在某些条件下被节点共享。这些节点是兄弟或同辈节点，而且：</p>
 
 <ol>
-  <li>元素必须在相同的鼠标状态下(比如，一个有<code>:hover</code>而另一个没有)</li>
+  <li>元素必须在相同的鼠标状态下(比如，一个有 :hover 而另一个没有)</li>
   <li>两个元素都不应该有id</li>
   <li>标签名要匹配</li>
   <li>class属性要匹配</li>
@@ -87,7 +87,7 @@
 
 <p>为了更简单地计算样式，Firefox有两个额外的树：规则树和样式上下文树。Webkit也有样式对象，不过他们都不保存在树中，只有DOM节点指向与它相关的样式。</p>
 
-<p><img src="http://farm8.staticflickr.com/7031/6490768261_6bb541748b.jpg&quot; width=&quot;500&quot; height=&quot;318&quot;" alt="style context tree" /></p>
+<p><img src="http://i1256.photobucket.com/albums/ii494/Foredoomed/ffcontexttree_zpsabf5955e.png" alt="firefox style context tree" title="firefox style context tree" /></p>
 
 <p>样式上下文树包含最终值。这个值是通过应用在正确顺序上的所有匹配的规则和把逻辑值转换成具体的值。比如，如果逻辑值是屏幕的百分比，那它会被计算和转换成绝对值。规则树的想法真的是非常聪明，它使得在节点间共享这些值，避免了再次的计算，也节省了空间。</p>
 
@@ -95,19 +95,19 @@
 
 <p>这个查找路径的想法就像在字典中查单词一样，让我看一下已经计算好的规则树：</p>
 
-<p><img src="http://farm8.staticflickr.com/7152/6490816137_053bb01868.jpg&quot; width=&quot;400&quot; height=&quot;261&quot;" alt="rule tree" /></p>
+<p><img src="http://i1256.photobucket.com/albums/ii494/Foredoomed/ruletree_zpsa48b0bdd.png" alt="rule tree" title="rule tree" /></p>
 
 <p>假设我们需要为一个上下文树中的元素匹配规则，并且找到了匹配的规则是B - E - I。我们已经在树中有这个路径，因为我们已经计算了路径A - B - E - I - L，所以现在剩下的工作变得轻松很多。</p>
 
 <p>让我看一下这棵树是怎么减轻我们的工作量的。</p>
 
-<p>分配成为结构(Division into structs)</p>
+<h4 id="division-into-structs">分配成为结构(Division into structs)</h4>
 
 <p>样式上下文被分配成为结构。这些结构包含了某个种类的样式信息，比如border或color。所有的属性在结构中要么被继承，要么没有被继承。继承的属性除非是被元素定义，否则继承自他的父亲。没有继承的属性(被称为”reset”属性)在某有定义的情况下使用默认值。</p>
 
 <p>这棵树的作用是缓存树中的整个结构(包含计算完成的最终值)。这个想法就是，如果底端的节点不能满足一个结构的定义，那么就可以使用缓存结构中更上层的节点。</p>
 
-<p>用规则树计算样式上下文</p>
+<h4 id="section-3">用规则树计算样式上下文</h4>
 
 <p>当为某个元素计算样式上下文时，我们首先计算规则树中的一个路径，或者使用现有的一个路径。然后开始应用路径上的规则来填充新样式上下文的结构。我们从路径的底部节点开始(最高的优先级，通常是最具体的选择器)向上遍历整棵树直到结构被填充满。如果在规则节点中没有结构的规范，我们就可以做巨大的优化(向上遍历树直到找到一个完全匹配的节点，然后简单地指向它，这是最优优化，因为整个结构被共享了，节省计算最终值的工作量和内存）。</p>
 
@@ -147,11 +147,11 @@
 
 <p>规则树的结果大致是下面的样子(节点用节点名标记，#号后的数字是它指向的规则)：</p>
 
-<p><img src="http://farm8.staticflickr.com/7163/6490941481_7c897aeef6.jpg&quot; width=&quot;500&quot; height=&quot;294&quot;" alt="rule tree" /></p>
+<p><img src="http://i1256.photobucket.com/albums/ii494/Foredoomed/rule_tree_zps7562d5b1.png" alt="rule tree" title="rule tree" /></p>
 
 <p>上下文树则是下面的的样子(冒号后的是它指向的规则节点)：</p>
 
-<p><img src="http://farm8.staticflickr.com/7172/6490949269_a4116c1fd5.jpg&quot; width=&quot;400&quot; height=&quot;305&quot;" alt="context tree" /></p>
+<p><img src="http://i1256.photobucket.com/albums/ii494/Foredoomed/contexttree_zpsc7ce4116.png" alt="context tree" title="context tree" /></p>
 
 <p>假设解析HTML而且要得到第二个div标签，我们需要为这个节点创建一个样式上下文，然后填充它的样式结构。</p>
 

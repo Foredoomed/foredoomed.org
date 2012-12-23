@@ -74,7 +74,7 @@ ruleset
 
 Webkit使用Flex和Bison解析器生成器，从CSS语法文件自动创建解析器，而Bison创建的是自下而上的shift-reduce解析器。Firefox使用手动写的自上而下的解析器。两种情况下，每个CSS文件都会被解析成为StyleSheet对象，每个对象都包含CSS规则。CSS规则对象包含选择器和声明对象，还有其他CSS语法中对应的对象。
 
-![parsing css](http://farm8.staticflickr.com/7145/6486240717_22094df7b7.jpg" width="500" height="393")
+![parsing css](http://i1256.photobucket.com/albums/ii494/Foredoomed/parsing_zpsdce2b340.png "parsing css")
 
 ## 3.4 处理scripts和style sheets的顺序
 

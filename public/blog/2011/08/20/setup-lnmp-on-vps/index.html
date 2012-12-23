@@ -64,7 +64,7 @@ wget http://pecl.php.net/get/PDO_MYSQL-1.0.2.tgz
 wget ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick.tar.gz
 wget http://pecl.php.net/get/imagick-3.0.1.tgz</code></pre>
 
-<h3 id="mysql">编译安装MySQL</h3>
+<h3 id="mysql">安装MySQL</h3>
 
 <p>首先添加mysql用户组和用户：</p>
 
@@ -212,7 +212,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'mysql'@'127.0.0.1' IDENTIFIED BY 'mysql';</code>
 <pre><code>vim /etc/rc.local
 /usr/local/webserver/mysql/bin/mysqld_safe --defaults-file=/usr/local/webserver/mysql/my.cnf &amp;</code></pre>
 
-<h2 id="php">编译安装PHP</h2>
+<h2 id="php">安装PHP</h2>
 
 <p>首先创建一个用户和组(用来管理PHP/Nginx/Wordpress)
 创建用户和组</p>
@@ -382,7 +382,7 @@ env[MALLOC_CHECK_] = 2</code></pre>
 <pre><code>vim /etc/rc.local
 /usr/local/webserver/php/sbin/php-fpm</code></pre>
 
-<h2 id="nginx">编译安装Nginx</h2>
+<h2 id="nginx">安装Nginx</h2>
 
 <p>首先编译安装Nginx所需的pcre库：</p>
 
