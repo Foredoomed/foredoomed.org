@@ -18,6 +18,7 @@ layout: nil
     <author>Foredoomed</author>
     <guid>{{ post.id }}</guid>
     <pubDate>{{ post.date | date: "%B %e, %Y" }}</pubDate>
+    <description>{{ post.content | xml_escape }}</description>
   </item>
   {% endfor %}
 
