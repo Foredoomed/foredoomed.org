@@ -1,0 +1,26 @@
+---
+layout: nil
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+
+<channel>
+  <title>Zhixingheyi</title>
+  <link>http://liuxuan.info</link>
+  <description>The homepage of Zhixingheyi</description>
+  <pubDate>{{ site.time | time: "%B %e, %Y" }}</pubDate>
+  <lastBuildDate>{{ site.time | time: "%B %e, %Y" }}</lastBuildDate>
+
+  {% for post in site.posts %}
+  <item>
+    <title>{{ post.title }}</title>
+    <link>{{ post.url }}</link>
+    <author>Foredoomed</author>
+    <guid>{{ post.id }}</guid>
+    <pubDate>{{ post.date | date: "%B %e, %Y" }}</pubDate>
+  </item>
+  {% endfor %}
+
+</channel>
+
+</rss>
