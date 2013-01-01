@@ -2,30 +2,28 @@
 layout: nil
 ---
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"
-                   xmlns:dc="http://purl.org/dc/elements/1.1/"
-                   xmlns:atom="http://www.w3.org/2005/Atom"
-                   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/">
+<rss version="2.0">
 
 <channel>
   <title>Zhixingheyi</title>
-  <atom:link href="http://liuxuan.info/rss2.xml" rel="self" type="application/rss+xml" />
-  <atom:link href="/css/highlight.css" rel="stylesheet" type="text/css"/>
   <link>http://liuxuan.info</link>
   <description>The homepage of Zhixingheyi</description>
   <language>zh-cn</language>
-  <dc:creator>Foredoomed</dc:creator>
-  <pubDate>{{ site.time | time: "%a, %d %b %Y %H:%M:%S +0100" }}</pubDate>
-  <lastBuildDate>{{ site.time | time: "%a, %d %b %Y %H:%M:%S +0100" }}</lastBuildDate>
+  <managingEditor>Foredoomed</managingEditor>
+  <webMaster>Foredoomed</webMaster>
+  <pubDate>{{ site.time | time: "%a, %d %b %Y %H:%M:%S +0800" }}</pubDate>
+  <lastBuildDate>{{ site.time | time: "%a, %d %b %Y %H:%M:%S +0800" }}</lastBuildDate>
 
   {% for post in site.posts %}
   <item>
+    <author>Foredoomed</author>
     <title>{{ post.title }}</title>
     <link>{{ post.url }}</link>
-    <dc:creator>Foredoomed</dc:creator>
     <guid>{{ post.id }}</guid>
-    <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S +0100" }}</pubDate>
-    <content:encoded>{{ post.content | xml_escape }}</content:encoded>
+    <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S +0800" }}</pubDate>
+    <lastBuildDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S +0800" }}</lastBuildDate>
+    <description>{{ post.content | xml_escape }}</description>
+    <comments>{{ post.url }}</comments>
   </item>
   {% endfor %}
 
