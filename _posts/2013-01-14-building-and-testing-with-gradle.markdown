@@ -152,6 +152,10 @@ artifacts {
 
 Gradle还可以重用Ant的构建文件或者Maven的pom文件，所以如果你以前用Ant或者Maven的话，转到Gradle是一件非常容易的事。
 
+## 总结
+
+现在回头来看build.gradle文件，是不是很清楚，很好读？在我看来，这就是Gradle最大的优势所在。
+
 ## 参考资料
 
 * [Gradle document](http://www.gradle.org/documentation "Gradle document")
