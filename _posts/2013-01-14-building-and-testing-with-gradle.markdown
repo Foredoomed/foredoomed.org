@@ -45,7 +45,9 @@ OS: Mac OS X 10.7.5 x86_64
 
 package info.liuxuan.gradle.example
 public class HelloWorld {
-public static void main(String args[]) {  	System.out.println(“hello, world”); }  }
+  public static void main(String args[]) {      System.out.println(“hello, world”); 
+  }
+  }
 
 {% endhl %}
 
@@ -107,41 +109,41 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 repositories {  
-	mavenCentral()  
+  mavenCentral()  
 }
 
 dependencies {
 
-	compile(  
-   		'com.google.guava:guava:13.0.1',  
-		'io.netty:netty:3.6.1.Final',  
-		'org.slf4j:slf4j-api:1.7.2',  
-		'commons-io:commons-io:2.4'  
-	)
+  compile(  
+    'com.google.guava:guava:13.0.1',  
+    'io.netty:netty:3.6.1.Final',  
+    'org.slf4j:slf4j-api:1.7.2',  
+    'commons-io:commons-io:2.4'  
+  )
 
-	runtime(  
-		'com.googlecode.sli4j:sli4j-slf4j-logback:2.0',  
-		'ch.qos.logback:logback-classic:1.0.9'  
-	)
+  runtime(  
+    'com.googlecode.sli4j:sli4j-slf4j-logback:2.0',  
+    'ch.qos.logback:logback-classic:1.0.9'  
+  )
 
-	testCompile(  
-		'junit:junit:4.10',  
-		'org.mockito:mockito-all:1.9.0',  
-		'org.apache.httpcomponents:httpcore:4.2.1',  
-		'org.apache.httpcomponents:httpclient:4.2.1',  
-		'org.apache.httpcomponents:fluent-hc:4.2.1',  
-		'commons-logging:commons-logging:1.1.1',  
-	)
+  testCompile(  
+    'junit:junit:4.10',  
+    'org.mockito:mockito-all:1.9.0',  
+    'org.apache.httpcomponents:httpcore:4.2.1',  
+    'org.apache.httpcomponents:httpclient:4.2.1',  
+    'org.apache.httpcomponents:fluent-hc:4.2.1',  
+    'commons-logging:commons-logging:1.1.1',  
+  )
 	
 }
 
 task sourcesJar(type: Jar) {  
-     classifier = 'sources'  
-     from sourceSets.main.allSource  
+  classifier = 'sources'  
+  from sourceSets.main.allSource  
 }
 
 artifacts {  
-     archives sourcesJar  
+  archives sourcesJar  
 }
 
 {% endhl %}

@@ -9,7 +9,7 @@ module Jekyll
     end
 
     def render(context)
-      source = "<pre><code>"
+      source = "<pre class=\"prettyprint\"><code>"
       code = CGI.escapeHTML super.lstrip.rstrip
       code.lines.each do |line|
         source += "#{ line }"

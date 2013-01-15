@@ -7,8 +7,8 @@
   <meta name="description" content="The homepage of Zhixingheyi" />
   <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="http://feeds.feedburner.com/zhixingheyi"/>
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link rel="stylesheet" type="text/css" href="/css/highlight.css" />
-  <title>{{ site.title }}</title>
+  <link rel="stylesheet" type="text/css" href="/css/prettify.css" />
+  <title>{{ page.title }}</title>
 </head>
 
 <body>
@@ -17,9 +17,9 @@
   {{ content }}
 </div>
 
-<script src="/javascript/highlight.pack.js"></script>
+<script type="text/javascript" src="/javascript/prettify.js"></script>
 <script type="text/javascript">
-  hljs.initHighlightingOnLoad();
+  prettyPrint();
 </script>
 
 <!-- Google Analytics -->
