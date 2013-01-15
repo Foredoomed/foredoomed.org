@@ -26,7 +26,6 @@ layout: nil
     <comments>{{ post.url }}</comments>
   </item>
   {% endfor %}
-
 </channel>
 
 </rss>
