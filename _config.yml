@@ -3,5 +3,5 @@ permalink: /blog/:year/:month/:day/:title/
 archive_dir: blog/archives
 destination: public
 
-markdown: kramdown
+markdown: redcarpet
 
