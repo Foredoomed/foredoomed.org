@@ -5,7 +5,7 @@ date: 2012-06-14 23:04
 ---
 这次为一个新买的VPS安装博客环境，特此记录如下。
 
-## 0.CentOS 6
+## CentOS
 
 ### 删除和替换已有软件
 
@@ -20,43 +20,110 @@ $ yum remove httpd
 $ service rsyslog stop
 $ yum remove rsyslog
 
-# 添加EPEL软件库
+{% endhl %}
+
+### 添加EPEL软件库
+
+{% hl %}
+
 $ rpm -Uvh http:#dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-7.noarch.rpm
 
-# 添加RPMforge软件库
+{% endhl %}
+
+### 添加RPMforge软件库
+
+{% hl %}
+
 $ rpm -Uvh http://packages.sw.be/rpmforge-release/rpmforge-release-0.5.2-2.el6.rf.i386.rpm
 
-# 安装syslog-ng代替rsyslog
+{% endhl %}
+
+### 更新软件
+
+{% hl %}
+
+$ yum upgrade
+
+{% endhl %}
+
+### 安装syslog-ng代替rsyslog
+
+{% hl %}
+
 $ yum install syslog-ng
 $ chkconfig syslog-ng on
 
-# 安装dropbear代替openssh
+{% endhl %}
+
+### 安装dropbear代替openssh
+
+{% hl %}
+
 $ yum install dropbear
 $ chkconfig dropbear on
 
-# 等dropbear配置好后
+{% endhl %}
+
+### 等dropbear配置好后
+
+{% hl %}
+
 $ service sshd stop
 $ yum remove openssh
 
-# 安装yum-utils
+{% endhl %}
+
+### 安装yum-utils
+
+{% hl %}
+
 $ yum install yum-utils
 
-# 更新软件
-$ yum upgrade
+{% endhl %}
 
-# 安装ppp
+### 安装ppp和pptpd
+
+{% hl %}
+
 $ rpm -Uvh http:#poptop.sourceforge.net/yum/stable/rhel6/i386/ppp-2.4.5-17.0.rhel6.i686.rpm
 
-# 安装pptpd
 $ rpm -Uvh http:#poptop.sourceforge.net/yum/stable/rhel6/i386/pptpd-1.3.4-2.el6.i686.rpm
 
-# 安装git
-$ yum install git
+{% endhl %}
 
-# 安装nginx
+### 安装vsftpd
+
+{% hl %}
+
+$ yum install vsftpd
+$ chkconfig vsftpd on
+
+# 添加用户
+$ groupadd www
+$ useradd -g www username
+$ passwd username
+
+# 设定ftp登陆目录权限
+$ chown -R usernmae /path/to/ftp/folder
+
+{% endhl %}
+
+### 安装nginx
+
+{% hl %}
+
 $ rpm -Uvh http:#nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
 
 $ yum install nginx
+
+{% endhl %}
+
+### 其他安装
+
+{% hl %}
+
+# 安装git
+$ yum install git
 
 # 安装RVM
 $ curl -L https://get.rvm.io | bash -s stable
@@ -69,18 +136,6 @@ $ cd ~
 $ vim .gemrc  
 # 添加下面这行  
 gem: --no-ri --no-rdoc
-
-# 安装vsftpd
-$ yum install vsftpd
-$ chkconfig vsftpd on
-
-# 添加用户
-$ groupadd www
-$ useradd -g www username
-$ passwd username
-
-# 设定ftp登陆目录权限
-$ chown -R usernmae /path/to/ftp/folder
 
 {% endhl %}
 
@@ -114,7 +169,7 @@ $ cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 $ ntsysv  #按空格选择和取消，按F12退出
 {% endhl %}
 
-## 1.Debian
+## Debian
 
 ### 设置locale
 
