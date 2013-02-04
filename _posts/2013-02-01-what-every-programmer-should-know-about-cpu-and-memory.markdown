@@ -133,7 +133,7 @@ test1还是test2跑得更快？要解决这个问题，我们需要对**cache li
 
 MESI协议状态可以转换，即每个cache line所处的状态根据本核和其它核的读写操作在4个状态间进行转换。具体的状态转换可由下图表示：
 
-![MESI](http://i1256.photobucket.com/albums/ii494/Foredoomed/ScreenShot2013-02-03at43908PM_zps983797fe.png "MESI")
+![MESI](http://i1256.photobucket.com/albums/ii494/Foredoomed/mesi_zpsfdbedd50.png "MESI")
 
 在上图中，Local Read表示本内核读本Cache中的值，Local Write表示本内核写本Cache中的值，Remote Read表示其它内核读其它Cache中的值，Remote Write表示其它内核写其它Cache中的值。
 
