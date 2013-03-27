@@ -42,4 +42,4 @@ end
 
 导出成功后再把html拖曳到Evernote的图标上就可以，唯一的缺点是在导入过程中会下载东西，按取消就可以了。
 
-代码已经放到[Github](https://github.com/Foredoomed/GR2EN)上了.
+代码已经放到[Github](https://github.com/Foredoomed/GR2EN)上了。
