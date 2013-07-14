@@ -62,13 +62,21 @@ date: 2011-11-17 23:36
 
 ### 2012.12.22 更新
 
-* cloud - 云分享
-* colloquy - IRC客户端
+* Cloud - 云分享
+* Colloquy - IRC客户端
 * CoRD - 远程控制
 * Dash - 编程语言文档
 * Dropbox - 云备份
-* Entropy - 解压缩
+* <s>Entropy - 解压缩</s>
 * Evernote - 云笔记
 * iStats Menus - 系统监控
 * Sublime Text 2 - 编程工具
 * Tweetbot - twitter客户端
+
+### 2013.07.14 更新
+
+* KeePassX - 密码管理
+* AeroFS - 云存储
+* DynamicLyrisc - iTunes歌词显示
+* Sparrow - 邮件客户端
+* XtraFinder - Finder增强
