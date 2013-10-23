@@ -41,7 +41,7 @@ date: 2011-11-17 23:36
 ## 编程类
 
 *  Homebrew - 类似于Linux下的apt和yum
-*  eclipse - 不解释
+*  <s>eclipse - 不解释</s>
 *  MacVim - 神器
 *  MySQL - 数据库
 *  <s>Sequel Pro - MySQL的GUI客户端</s>
@@ -52,19 +52,19 @@ date: 2011-11-17 23:36
 
 * Alfred - 快速启动软件
 * CCleaner - 系统清理
-* Echofon - Twitter客户端
+* <s>Echofon - Twitter客户端</s>
 * Google Drive
 * Reeder - RSS阅读器
 * Skim - PDF阅读器
 * SourceTree - git的GUI客户端
-* Temperature Monitor - 显示温度
-* TotalFinder - Finder增强
+* <s>Temperature Monitor - 显示温度</s>
+* <s>TotalFinder - Finder增强</s>
 
 ### 2012.12.22 更新
 
 * Cloud - 云分享
 * Colloquy - IRC客户端
-* CoRD - 远程控制
+* <s>CoRD - 远程控制</s>
 * Dash - 编程语言文档
 * Dropbox - 云备份
 * <s>Entropy - 解压缩</s>
@@ -80,3 +80,12 @@ date: 2011-11-17 23:36
 * DynamicLyrisc - iTunes歌词显示
 * Sparrow - 邮件客户端
 * XtraFinder - Finder增强
+
+### 2013.10.23 更新
+
+* GoAgentX - 科学上网
+* Induction - 数据库管理
+* Sequential - Java开发
+* Skype - 聊天
+* Wireshark - HTTP工具
+* 虾米音乐 - 音乐
