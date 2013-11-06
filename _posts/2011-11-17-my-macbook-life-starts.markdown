@@ -21,22 +21,22 @@ date: 2011-11-17 23:36
 *  iChm - chm文件阅读
 *  Secret Socks - SSH工具
 *  iTerm2 - 控制台工具
-*  AppFresh - 软件更新
+*  <s>AppFresh - 软件更新</s>
 *  Cyberduck - FTP工具
 *  AliWangwang - 旺旺
 *  Caffeine - 屏保停止
 *  ClipMenu - 剪贴板增强
-*  Growl - 系统提示
-*  invisibliX - 隐藏文件浏览
-*  Mou - markdown文件编辑
+*  <s>Growl - 系统提示</s>
+*  InvisibliX - 隐藏文件浏览
+*  Mou - Markdown文件编辑
 *  MPlayerX - 视频播放
 *  <s>OnyX - 系统清理</s>
 *  QQ - 不解释
-*  Paragon NTFS for Mac OS X - 读写NTFS文件
-*  TestWrangler - 文件编辑
+*  <s>Paragon NTFS for Mac OS X - 读写NTFS文件</s>
+*  <s>TestWrangler - 文件编辑</s>
 *  The Unarchiver - 解压缩工具
 *  <s>Twitter - 不解释</s>
-*  Micosoft Office - 不解释
+*  <s>Micosoft Office - 不解释</s>
 
 ## 编程类
 
@@ -63,7 +63,7 @@ date: 2011-11-17 23:36
 ### 2012.12.22 更新
 
 * Cloud - 云分享
-* Colloquy - IRC客户端
+* <s>Colloquy - IRC客户端</s>
 * <s>CoRD - 远程控制</s>
 * Dash - 编程语言文档
 * Dropbox - 云备份
@@ -77,15 +77,17 @@ date: 2011-11-17 23:36
 
 * KeePassX - 密码管理
 * AeroFS - 云存储
-* DynamicLyrisc - iTunes歌词显示
+* DynamicLyrics - iTunes歌词显示
 * Sparrow - 邮件客户端
-* XtraFinder - Finder增强
+* <s>XtraFinder - Finder增强</s>
 
 ### 2013.10.23 更新
 
 * GoAgentX - 科学上网
 * Induction - 数据库管理
-* Sequential - Java开发
+* Sequential - 看图
 * Skype - 聊天
 * Wireshark - HTTP工具
 * 虾米音乐 - 音乐
+* LimeChat - IRC客户端
+* Skitch - 图片编辑
