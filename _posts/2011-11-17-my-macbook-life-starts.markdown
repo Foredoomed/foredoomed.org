@@ -10,84 +10,46 @@ date: 2011-11-17 23:36
 由于之前一直在用Linux，所以过度到Mac OS完全没有问题。然后就是要安装各种软件了，这是比较蛋疼的事，Mac上有很多非常优秀的软件都是要收费的，而且有的还是每次升级版本都要付钱。。。好吧，所以我决定相同类型的软件尽量找免费的，免费的也有宝啊！
 
 下面是我目前安装的软件列表：
-  
-## 非编程类 
 
 *  Chrome - 唯一使用的浏览器
-*  Sunpinyin - 中文输入法
 *  Parallels Desktop - 虚拟机
 *  AppCleaner - 软件清理
 *  Thunder - 迅雷
 *  iChm - chm文件阅读
 *  Secret Socks - SSH工具
 *  iTerm2 - 控制台工具
-*  <s>AppFresh - 软件更新</s>
 *  Cyberduck - FTP工具
 *  AliWangwang - 旺旺
 *  Caffeine - 屏保停止
 *  ClipMenu - 剪贴板增强
-*  <s>Growl - 系统提示</s>
 *  InvisibliX - 隐藏文件浏览
 *  Mou - Markdown文件编辑
 *  MPlayerX - 视频播放
-*  <s>OnyX - 系统清理</s>
 *  QQ - 不解释
-*  <s>Paragon NTFS for Mac OS X - 读写NTFS文件</s>
-*  <s>TestWrangler - 文件编辑</s>
 *  The Unarchiver - 解压缩工具
-*  <s>Twitter - 不解释</s>
-*  <s>Micosoft Office - 不解释</s>
-
-## 编程类
-
 *  Homebrew - 类似于Linux下的apt和yum
-*  <s>eclipse - 不解释</s>
-*  MacVim - 神器
-*  MySQL - 数据库
-*  <s>Sequel Pro - MySQL的GUI客户端</s>
-*  <s>GitHub - 不解释</s>
-*  <s>GitX - git的GUI客户端</s>
-
-### 2012.6.19 更新
-
-* Alfred - 快速启动软件
-* CCleaner - 系统清理
-* <s>Echofon - Twitter客户端</s>
-* Google Drive
-* Reeder - RSS阅读器
-* Skim - PDF阅读器
-* SourceTree - git的GUI客户端
-* <s>Temperature Monitor - 显示温度</s>
-* <s>TotalFinder - Finder增强</s>
-
-### 2012.12.22 更新
-
-* Cloud - 云分享
-* <s>Colloquy - IRC客户端</s>
-* <s>CoRD - 远程控制</s>
-* Dash - 编程语言文档
-* Dropbox - 云备份
-* <s>Entropy - 解压缩</s>
-* Evernote - 云笔记
-* iStats Menus - 系统监控
-* Sublime Text 2 - 编程工具
-* Tweetbot - twitter客户端
-
-### 2013.07.14 更新
-
-* KeePassX - 密码管理
-* AeroFS - 云存储
-* DynamicLyrics - iTunes歌词显示
-* Sparrow - 邮件客户端
-* <s>XtraFinder - Finder增强</s>
-
-### 2013.10.23 更新
-
-* GoAgentX - 科学上网
-* Induction - 数据库管理
-* Sequential - 看图
-* Skype - 聊天
-* Wireshark - HTTP工具
-* 虾米音乐 - 音乐
-* LimeChat - IRC客户端
-* Skitch - 图片编辑
+*  Alfred - 快速启动软件
+*  CCleaner - 系统清理
+*  Google Drive - 云存储
+*  Reeder - RSS阅读器
+*  Skim - PDF阅读器
+*  Cloud - 云分享
+*  Dash - 编程语言文档
+*  Dropbox - 云备份
+*  Evernote - 云笔记
+*  iStats Menus - 系统监控
+*  Sublime Text 2 - 编程工具
+*  Tweetbot - twitter客户端
+*  KeePassX - 密码管理
+*  AeroFS - 云存储
+*  DynamicLyrics - iTunes歌词显示
+*  Sparrow - 邮件客户端
+*  Induction - 数据库管理
+*  Sequential - 看图
+*  Skype - 聊天
+*  Wireshark - HTTP工具
+*  虾米音乐 - 音乐
+*  LimeChat - IRC客户端
+*  Skitch - 图片编辑
+*  Adium - IM
+*  Boom - 音效增强
