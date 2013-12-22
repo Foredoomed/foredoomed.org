@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "《Effective Javascript》笔记"
+title: "Effective Javascript的笔记"
 date: 2013-12-19 19:59
 ---
 今天通读了一遍《Effective Javascript》这本书，感觉写得非常好。虽然整本书只有200多页，但是涉及到了编写高质量Javascript程序需要注意的方方面面，读完后有一种豁然开朗的感觉，所以做一下笔记备忘。
