@@ -51,7 +51,7 @@ struct objc_class {
  
 {% endhl %}
  
-objc_class是一个结构体，它包含了所有运行时需要的有关类的信息，包括这个类的父类是什么类，实例变量，方法，协议等。有趣的是，objc_class中也有一个isa属性，那么它又指向哪里呢？它指向的是一个叫做metaclass的对象，并且类型也是objc_class。所以实例化一个类会有两个对象：本身和metaclass对象。这样做的目的是把实例方法的信息保存到自己本身的类中，而把类方法保存到metaclass类里。那么metaclass中的isa指向哪里呢？因为metaclass类是没有metaclass方法的，所有就不需要再多一个类来保存metaclass类的方法信息，因此，metaclass对象的isa指向自己，形成一个闭环结构。
+可以看到`obj_class`是一个结构体，它包含了所有运行时需要的有关类的信息，包括这个类的父类是什么类，实例变量，方法，协议等。有趣的是，`obj_class`中也有一个isa属性，那么它又指向哪里呢？它指向的是一个叫做metaclass的对象，并且类型也是`obj_class`。所以实例化一个类会有两个对象：本身和metaclass对象。这样做的目的是把实例方法的信息保存到自己本身的类中，而把类方法保存到metaclass类里。那么metaclass中的isa指向哪里呢？因为metaclass类是没有metaclass方法的，所有就不需要再多一个类来保存metaclass类的方法信息，因此，metaclass对象的isa指向自己，形成一个闭环结构。
  
 ##1.消息机制
  
@@ -108,7 +108,7 @@ typedef struct objc_object {
 id的作用类似于Javascript中的var，也就是说用id关键字声明的变量在编译时并不知道其具体类型，而是在运行时决定。因为有id关键字的存在，所以Objective-C就不是单纯的面向对象语言，而是面向对象语言和动态语言的混合体，从这点来看Objective-C倒跟C#有点像。
 
 ##参考资料
- 
-[1] [Concepts in Objective-C Programming: Object Modeling](https://developer.apple.com/library/ios/documentation/general/conceptual/CocoaEncyclopedia/ObjectModeling/ObjectModeling.html)
-[2] [Objective-C Wiki](http://en.wikipedia.org/wiki/Objective-C)
+
+[1] [Objective-C Wiki](http://en.wikipedia.org/wiki/Objective-C)  
+[2] [Concepts in Objective-C Programming: Object Modeling](https://developer.apple.com/library/ios/documentation/general/conceptual/CocoaEncyclopedia/ObjectModeling/ObjectModeling.html)  
 [3] [Objective-C Runtime Programming Guide](https://developer.apple.com/library/mac/documentation/cocoa/conceptual/ObjCRuntimeGuide/Articles/ocrtHowMessagingWorks.html)
