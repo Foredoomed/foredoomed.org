@@ -9,21 +9,21 @@ layout: nil
   <link>http://foredoomed.org</link>
   <description>The homepage of Zhixingheyi</description>
   <language>zh-cn</language>
-  <managingEditor>Foredoomed</managingEditor>
-  <webMaster>Foredoomed</webMaster>
+  <managingEditor>mc.liuxuan@gmail.com (Foredoomed)</managingEditor>
+  <webMaster>mc.liuxuan@gmail.com (Foredoomed)</webMaster>
   <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
   <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
 
   {% for post in site.posts limit: 10 %}
   <item>
-    <author>Foredoomed</author>
+    <author>mc.liuxuan@gmail.com (Foredoomed)</author>
     <title>{{ post.title }}</title>
-    <link>{{ post.url }}</link>
-    <guid>{{ post.id }}</guid>
+    <link>http://foredoomed.org{{ post.url }}</link>
+    <guid>http://foredoomed.org{{ post.id }}</guid>
     <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
     <lastBuildDate>{{ post.date | date_to_rfc822 }}</lastBuildDate>
     <description>{{ post.content | xml_escape }}</description>
-    <comments>{{ post.url }}</comments>
+    <comments>http://foredoomed.org{{ post.url }}</comments>
   </item>
   {% endfor %}
 </channel>
