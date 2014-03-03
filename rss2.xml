@@ -11,8 +11,8 @@ layout: nil
   <language>zh-cn</language>
   <managingEditor>Foredoomed</managingEditor>
   <webMaster>Foredoomed</webMaster>
-  <pubDate>{{ site.time | date_to_xmlschema }}</pubDate>
-  <lastBuildDate>{{ site.time | date_to_xmlschema }}</lastBuildDate>
+  <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
+  <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
 
   {% for post in site.posts limit: 10 %}
   <item>
@@ -20,8 +20,8 @@ layout: nil
     <title>{{ post.title }}</title>
     <link>{{ post.url }}</link>
     <guid>{{ post.id }}</guid>
-    <pubDate>{{ post.date | date_to_xmlschema }}</pubDate>
-    <lastBuildDate>{{ post.date | date_to_xmlschema }}</lastBuildDate>
+    <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
+    <lastBuildDate>{{ post.date | date_to_rfc822 }}</lastBuildDate>
     <description>{{ post.content | xml_escape }}</description>
     <comments>{{ post.url }}</comments>
   </item>
