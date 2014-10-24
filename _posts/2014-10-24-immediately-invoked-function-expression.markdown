@@ -5,7 +5,7 @@ date: 2014-10-24 21:31
 ---
 
 说起JavaScript的立即调用的函数表达式(IIFE,Immediately-Invoked Function Expression),随便找一个JS框架或者类库就能看到它的存在。不过，最近在看[Underscore.js](underscorejs.org)源代码的时候又发现了一种新的写法，
-这马上激起了我的好奇心，看来这个IIFE还是值得好好研究一下的。
+这马上激起了我的好奇心，所以这次就来好好地研究一下。
  
 ## 0. IIFE的写法
  
