@@ -1,8 +1,8 @@
 require 'rake'
 
 desc "Create a new post in _posts"
-task :new, :title do |t, args|
-  title = args.title
+task :new do
+  title = ARGV.last
   filename = "_posts/#{Time.now.strftime('%Y-%m-%d')}-#{title}.markdown"
 
   open(filename, 'w') do |post|
