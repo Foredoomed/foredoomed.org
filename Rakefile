@@ -1,8 +1,9 @@
 require 'rake'
 
+# usage rake new[my-new-post] or rake new['my new post']
 desc "Create a new post in _posts"
-task :new do
-  title = ARGV[1].dup
+task :new , :title do |t, args|
+  title = args.title
   post = "_posts/#{Time.now.strftime('%Y-%m-%d')}-#{title}.markdown"
 
   open(post, 'w') do |p|
