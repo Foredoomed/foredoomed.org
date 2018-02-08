@@ -1,2 +1,2 @@
-source 'https://ruby.taobao.org/'
-gem 'jekyll', '< 2.0'
+source 'https://rubygems.org'
+gem 'jekyll', '1.5.1'

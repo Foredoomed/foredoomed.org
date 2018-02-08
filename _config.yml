@@ -4,4 +4,4 @@ archive_dir: blog/archives
 destination: public
 
 markdown: redcarpet
-
+encoding: utf-8
