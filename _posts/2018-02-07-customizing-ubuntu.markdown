@@ -22,17 +22,15 @@ $ sudo apt-get install fonts-wqy-microhei
 ##2. 安装终端字体
 先从[这里](https://github.com/powerline/fonts)下载字体，解压后进入目录执行：
 {% hl %}
-./install.sh
+$ ./install.sh
 {% endhl %}
 
 ##3. 安装浏览器
 {% hl %}
 $ sudo apt-get install chromium-browser
-{% endhl %}
 
 或者
 
-{% hl %}
 $ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
 $ sudo gdebi google-chrome-stable_current_amd64.deb
 {% endhl %}
@@ -60,13 +58,13 @@ $ sudo apt-get install unace p7zip-rar sharutils rar arj lunzip lzip
 
 ##7. 安装剪贴板管理器
 {% hl %}
-$ sudo apt-get install glipper # 
-或者 
+$ sudo apt-get install glipper
+或者
 $ sudo apt-get install clipit
 {% endhl %}
 
 ##8. 修改日期格式
-修改日期格式为12小时格式显示月份名称、日期和时间。右击面板右边的日期-时间小程序，然后点击配置，选中标有”使用自定义日期格式”的选框，然后填入
+修改日期格式为12小时格式显示月份名称、日期和时间。在”使用自定义日期格式”的选框中填入
 {% hl %}
 %B %e, %I:%M %p
 {% endhl %}
