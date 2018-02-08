@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "定制优化Ubuntu"
-date: 2018-02-07 11:19
+title: "配置优化Ubuntu"
+date: 2018-02-07 16:56
 ---
 ##0. 安装Flatabulous主题和图标
 {% hl %}
