@@ -28,9 +28,11 @@ $ ./install.sh
 ##3. 安装浏览器
 {% hl %}
 $ sudo apt-get install chromium-browser
+{% endhl %}
 
 或者
 
+{% hl %}
 $ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
 $ sudo gdebi google-chrome-stable_current_amd64.deb
 {% endhl %}
@@ -59,7 +61,11 @@ $ sudo apt-get install unace p7zip-rar sharutils rar arj lunzip lzip
 ##7. 安装剪贴板管理器
 {% hl %}
 $ sudo apt-get install glipper
+{% endhl %}
+
 或者
+
+{% hl %}
 $ sudo apt-get install clipit
 {% endhl %}
 
